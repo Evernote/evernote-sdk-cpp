@@ -89,6 +89,7 @@ class NoteStoreIf {
   virtual void shareNote(std::string& _return, const std::string& authenticationToken, const evernote::edam::Guid& guid) = 0;
   virtual void stopSharingNote(const std::string& authenticationToken, const evernote::edam::Guid& guid) = 0;
   virtual void authenticateToSharedNote(evernote::edam::AuthenticationResult& _return, const std::string& guid, const std::string& noteKey) = 0;
+  virtual void findRelated(RelatedResult& _return, const std::string& authenticationToken, const RelatedQuery& query, const RelatedResultSpec& resultSpec) = 0;
 };
 
 class NoteStoreNull : virtual public NoteStoreIf {
@@ -338,6 +339,9 @@ class NoteStoreNull : virtual public NoteStoreIf {
     return;
   }
   void authenticateToSharedNote(evernote::edam::AuthenticationResult& /* _return */, const std::string& /* guid */, const std::string& /* noteKey */) {
+    return;
+  }
+  void findRelated(RelatedResult& /* _return */, const std::string& /* authenticationToken */, const RelatedQuery& /* query */, const RelatedResultSpec& /* resultSpec */) {
     return;
   }
 };
@@ -9624,6 +9628,134 @@ class NoteStore_authenticateToSharedNote_presult {
 
 };
 
+typedef struct _NoteStore_findRelated_args__isset {
+  _NoteStore_findRelated_args__isset() : authenticationToken(false), query(false), resultSpec(false) {}
+  bool authenticationToken;
+  bool query;
+  bool resultSpec;
+} _NoteStore_findRelated_args__isset;
+
+class NoteStore_findRelated_args {
+ public:
+
+  NoteStore_findRelated_args() : authenticationToken("") {
+  }
+
+  virtual ~NoteStore_findRelated_args() throw() {}
+
+  std::string authenticationToken;
+  RelatedQuery query;
+  RelatedResultSpec resultSpec;
+
+  _NoteStore_findRelated_args__isset __isset;
+
+  bool operator == (const NoteStore_findRelated_args & rhs) const
+  {
+    if (!(authenticationToken == rhs.authenticationToken))
+      return false;
+    if (!(query == rhs.query))
+      return false;
+    if (!(resultSpec == rhs.resultSpec))
+      return false;
+    return true;
+  }
+  bool operator != (const NoteStore_findRelated_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const NoteStore_findRelated_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class NoteStore_findRelated_pargs {
+ public:
+
+
+  virtual ~NoteStore_findRelated_pargs() throw() {}
+
+  const std::string* authenticationToken;
+  const RelatedQuery* query;
+  const RelatedResultSpec* resultSpec;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _NoteStore_findRelated_result__isset {
+  _NoteStore_findRelated_result__isset() : success(false), userException(false), systemException(false), notFoundException(false) {}
+  bool success;
+  bool userException;
+  bool systemException;
+  bool notFoundException;
+} _NoteStore_findRelated_result__isset;
+
+class NoteStore_findRelated_result {
+ public:
+
+  NoteStore_findRelated_result() {
+  }
+
+  virtual ~NoteStore_findRelated_result() throw() {}
+
+  RelatedResult success;
+  evernote::edam::EDAMUserException userException;
+  evernote::edam::EDAMSystemException systemException;
+  evernote::edam::EDAMNotFoundException notFoundException;
+
+  _NoteStore_findRelated_result__isset __isset;
+
+  bool operator == (const NoteStore_findRelated_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    if (!(userException == rhs.userException))
+      return false;
+    if (!(systemException == rhs.systemException))
+      return false;
+    if (!(notFoundException == rhs.notFoundException))
+      return false;
+    return true;
+  }
+  bool operator != (const NoteStore_findRelated_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const NoteStore_findRelated_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _NoteStore_findRelated_presult__isset {
+  _NoteStore_findRelated_presult__isset() : success(false), userException(false), systemException(false), notFoundException(false) {}
+  bool success;
+  bool userException;
+  bool systemException;
+  bool notFoundException;
+} _NoteStore_findRelated_presult__isset;
+
+class NoteStore_findRelated_presult {
+ public:
+
+
+  virtual ~NoteStore_findRelated_presult() throw() {}
+
+  RelatedResult* success;
+  evernote::edam::EDAMUserException userException;
+  evernote::edam::EDAMSystemException systemException;
+  evernote::edam::EDAMNotFoundException notFoundException;
+
+  _NoteStore_findRelated_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
 class NoteStoreClient : virtual public NoteStoreIf {
  public:
   NoteStoreClient(boost::shared_ptr< ::apache::thrift::protocol::TProtocol> prot) :
@@ -9869,6 +10001,9 @@ class NoteStoreClient : virtual public NoteStoreIf {
   void authenticateToSharedNote(evernote::edam::AuthenticationResult& _return, const std::string& guid, const std::string& noteKey);
   void send_authenticateToSharedNote(const std::string& guid, const std::string& noteKey);
   void recv_authenticateToSharedNote(evernote::edam::AuthenticationResult& _return);
+  void findRelated(RelatedResult& _return, const std::string& authenticationToken, const RelatedQuery& query, const RelatedResultSpec& resultSpec);
+  void send_findRelated(const std::string& authenticationToken, const RelatedQuery& query, const RelatedResultSpec& resultSpec);
+  void recv_findRelated(RelatedResult& _return);
  protected:
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot_;
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> poprot_;
@@ -9957,6 +10092,7 @@ class NoteStoreProcessor : virtual public ::apache::thrift::TProcessor {
   void process_shareNote(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_stopSharingNote(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_authenticateToSharedNote(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_findRelated(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
  public:
   NoteStoreProcessor(boost::shared_ptr<NoteStoreIf> iface) :
     iface_(iface) {
@@ -10035,6 +10171,7 @@ class NoteStoreProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["shareNote"] = &NoteStoreProcessor::process_shareNote;
     processMap_["stopSharingNote"] = &NoteStoreProcessor::process_stopSharingNote;
     processMap_["authenticateToSharedNote"] = &NoteStoreProcessor::process_authenticateToSharedNote;
+    processMap_["findRelated"] = &NoteStoreProcessor::process_findRelated;
   }
 
   virtual bool process(boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot, boost::shared_ptr< ::apache::thrift::protocol::TProtocol> poprot);
@@ -10913,6 +11050,18 @@ class NoteStoreMultiface : virtual public NoteStoreIf {
         return;
       } else {
         ifaces_[i]->authenticateToSharedNote(_return, guid, noteKey);
+      }
+    }
+  }
+
+  void findRelated(RelatedResult& _return, const std::string& authenticationToken, const RelatedQuery& query, const RelatedResultSpec& resultSpec) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->findRelated(_return, authenticationToken, query, resultSpec);
+        return;
+      } else {
+        ifaces_[i]->findRelated(_return, authenticationToken, query, resultSpec);
       }
     }
   }

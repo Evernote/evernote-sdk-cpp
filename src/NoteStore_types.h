@@ -966,6 +966,153 @@ class ClientUsageMetrics {
 
 };
 
+typedef struct _RelatedQuery__isset {
+  _RelatedQuery__isset() : noteGuid(false), plainText(false) {}
+  bool noteGuid;
+  bool plainText;
+} _RelatedQuery__isset;
+
+class RelatedQuery {
+ public:
+
+  static const char* ascii_fingerprint; // = "D0297FC5011701BD87898CC36146A565";
+  static const uint8_t binary_fingerprint[16]; // = {0xD0,0x29,0x7F,0xC5,0x01,0x17,0x01,0xBD,0x87,0x89,0x8C,0xC3,0x61,0x46,0xA5,0x65};
+
+  RelatedQuery() : noteGuid(""), plainText("") {
+  }
+
+  virtual ~RelatedQuery() throw() {}
+
+  std::string noteGuid;
+  std::string plainText;
+
+  _RelatedQuery__isset __isset;
+
+  bool operator == (const RelatedQuery & rhs) const
+  {
+    if (__isset.noteGuid != rhs.__isset.noteGuid)
+      return false;
+    else if (__isset.noteGuid && !(noteGuid == rhs.noteGuid))
+      return false;
+    if (__isset.plainText != rhs.__isset.plainText)
+      return false;
+    else if (__isset.plainText && !(plainText == rhs.plainText))
+      return false;
+    return true;
+  }
+  bool operator != (const RelatedQuery &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RelatedQuery & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RelatedResult__isset {
+  _RelatedResult__isset() : notes(false), notebooks(false), tags(false) {}
+  bool notes;
+  bool notebooks;
+  bool tags;
+} _RelatedResult__isset;
+
+class RelatedResult {
+ public:
+
+  static const char* ascii_fingerprint; // = "8FB94C5E70BE9EFE1A25B683D762E68A";
+  static const uint8_t binary_fingerprint[16]; // = {0x8F,0xB9,0x4C,0x5E,0x70,0xBE,0x9E,0xFE,0x1A,0x25,0xB6,0x83,0xD7,0x62,0xE6,0x8A};
+
+  RelatedResult() {
+  }
+
+  virtual ~RelatedResult() throw() {}
+
+  std::vector<evernote::edam::Note>  notes;
+  std::vector<evernote::edam::Notebook>  notebooks;
+  std::vector<evernote::edam::Tag>  tags;
+
+  _RelatedResult__isset __isset;
+
+  bool operator == (const RelatedResult & rhs) const
+  {
+    if (__isset.notes != rhs.__isset.notes)
+      return false;
+    else if (__isset.notes && !(notes == rhs.notes))
+      return false;
+    if (__isset.notebooks != rhs.__isset.notebooks)
+      return false;
+    else if (__isset.notebooks && !(notebooks == rhs.notebooks))
+      return false;
+    if (__isset.tags != rhs.__isset.tags)
+      return false;
+    else if (__isset.tags && !(tags == rhs.tags))
+      return false;
+    return true;
+  }
+  bool operator != (const RelatedResult &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RelatedResult & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RelatedResultSpec__isset {
+  _RelatedResultSpec__isset() : maxNotes(false), maxNotebooks(false), maxTags(false) {}
+  bool maxNotes;
+  bool maxNotebooks;
+  bool maxTags;
+} _RelatedResultSpec__isset;
+
+class RelatedResultSpec {
+ public:
+
+  static const char* ascii_fingerprint; // = "CE4F8A673F7F1EE0C3F9D3A7932473D6";
+  static const uint8_t binary_fingerprint[16]; // = {0xCE,0x4F,0x8A,0x67,0x3F,0x7F,0x1E,0xE0,0xC3,0xF9,0xD3,0xA7,0x93,0x24,0x73,0xD6};
+
+  RelatedResultSpec() : maxNotes(0), maxNotebooks(0), maxTags(0) {
+  }
+
+  virtual ~RelatedResultSpec() throw() {}
+
+  int32_t maxNotes;
+  int32_t maxNotebooks;
+  int32_t maxTags;
+
+  _RelatedResultSpec__isset __isset;
+
+  bool operator == (const RelatedResultSpec & rhs) const
+  {
+    if (__isset.maxNotes != rhs.__isset.maxNotes)
+      return false;
+    else if (__isset.maxNotes && !(maxNotes == rhs.maxNotes))
+      return false;
+    if (__isset.maxNotebooks != rhs.__isset.maxNotebooks)
+      return false;
+    else if (__isset.maxNotebooks && !(maxNotebooks == rhs.maxNotebooks))
+      return false;
+    if (__isset.maxTags != rhs.__isset.maxTags)
+      return false;
+    else if (__isset.maxTags && !(maxTags == rhs.maxTags))
+      return false;
+    return true;
+  }
+  bool operator != (const RelatedResultSpec &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RelatedResultSpec & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
 }} // namespace
 
 #endif

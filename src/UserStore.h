@@ -64,7 +64,7 @@ typedef struct _UserStore_checkVersion_args__isset {
 class UserStore_checkVersion_args {
  public:
 
-  UserStore_checkVersion_args() : clientName(""), edamVersionMajor(1), edamVersionMinor(21) {
+  UserStore_checkVersion_args() : clientName(""), edamVersionMajor(1), edamVersionMinor(22) {
   }
 
   virtual ~UserStore_checkVersion_args() throw() {}

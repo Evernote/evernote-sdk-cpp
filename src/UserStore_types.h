@@ -231,7 +231,7 @@ class AuthenticationResult {
 };
 
 typedef struct _BootstrapSettings__isset {
-  _BootstrapSettings__isset() : enableFacebookSharing(false), enableGiftSubscriptions(false), enableSupportTickets(false), enableSharedNotebooks(false), enableSingleNoteSharing(false), enableSponsoredAccounts(false), enableTwitterSharing(false) {}
+  _BootstrapSettings__isset() : enableFacebookSharing(false), enableGiftSubscriptions(false), enableSupportTickets(false), enableSharedNotebooks(false), enableSingleNoteSharing(false), enableSponsoredAccounts(false), enableTwitterSharing(false), enableLinkedInSharing(false) {}
   bool enableFacebookSharing;
   bool enableGiftSubscriptions;
   bool enableSupportTickets;
@@ -239,15 +239,16 @@ typedef struct _BootstrapSettings__isset {
   bool enableSingleNoteSharing;
   bool enableSponsoredAccounts;
   bool enableTwitterSharing;
+  bool enableLinkedInSharing;
 } _BootstrapSettings__isset;
 
 class BootstrapSettings {
  public:
 
-  static const char* ascii_fingerprint; // = "3419C0A13B768EA9DB70C9DB8AC18624";
-  static const uint8_t binary_fingerprint[16]; // = {0x34,0x19,0xC0,0xA1,0x3B,0x76,0x8E,0xA9,0xDB,0x70,0xC9,0xDB,0x8A,0xC1,0x86,0x24};
+  static const char* ascii_fingerprint; // = "8090B65B701C6C2E81ED1017FE437B1A";
+  static const uint8_t binary_fingerprint[16]; // = {0x80,0x90,0xB6,0x5B,0x70,0x1C,0x6C,0x2E,0x81,0xED,0x10,0x17,0xFE,0x43,0x7B,0x1A};
 
-  BootstrapSettings() : serviceHost(""), marketingUrl(""), supportUrl(""), accountEmailDomain(""), enableFacebookSharing(0), enableGiftSubscriptions(0), enableSupportTickets(0), enableSharedNotebooks(0), enableSingleNoteSharing(0), enableSponsoredAccounts(0), enableTwitterSharing(0) {
+  BootstrapSettings() : serviceHost(""), marketingUrl(""), supportUrl(""), accountEmailDomain(""), enableFacebookSharing(0), enableGiftSubscriptions(0), enableSupportTickets(0), enableSharedNotebooks(0), enableSingleNoteSharing(0), enableSponsoredAccounts(0), enableTwitterSharing(0), enableLinkedInSharing(0) {
   }
 
   virtual ~BootstrapSettings() throw() {}
@@ -263,6 +264,7 @@ class BootstrapSettings {
   bool enableSingleNoteSharing;
   bool enableSponsoredAccounts;
   bool enableTwitterSharing;
+  bool enableLinkedInSharing;
 
   _BootstrapSettings__isset __isset;
 
@@ -304,6 +306,10 @@ class BootstrapSettings {
       return false;
     else if (__isset.enableTwitterSharing && !(enableTwitterSharing == rhs.enableTwitterSharing))
       return false;
+    if (__isset.enableLinkedInSharing != rhs.__isset.enableLinkedInSharing)
+      return false;
+    else if (__isset.enableLinkedInSharing && !(enableLinkedInSharing == rhs.enableLinkedInSharing))
+      return false;
     return true;
   }
   bool operator != (const BootstrapSettings &rhs) const {
@@ -321,8 +327,8 @@ class BootstrapSettings {
 class BootstrapProfile {
  public:
 
-  static const char* ascii_fingerprint; // = "EB65540F13576566FA9A11C6E66235D1";
-  static const uint8_t binary_fingerprint[16]; // = {0xEB,0x65,0x54,0x0F,0x13,0x57,0x65,0x66,0xFA,0x9A,0x11,0xC6,0xE6,0x62,0x35,0xD1};
+  static const char* ascii_fingerprint; // = "F08DD366855A088C3D9A0CF696FDB702";
+  static const uint8_t binary_fingerprint[16]; // = {0xF0,0x8D,0xD3,0x66,0x85,0x5A,0x08,0x8C,0x3D,0x9A,0x0C,0xF6,0x96,0xFD,0xB7,0x02};
 
   BootstrapProfile() : name("") {
   }
@@ -355,8 +361,8 @@ class BootstrapProfile {
 class BootstrapInfo {
  public:
 
-  static const char* ascii_fingerprint; // = "F58F1BBA49CBAFA58A368FB854546947";
-  static const uint8_t binary_fingerprint[16]; // = {0xF5,0x8F,0x1B,0xBA,0x49,0xCB,0xAF,0xA5,0x8A,0x36,0x8F,0xB8,0x54,0x54,0x69,0x47};
+  static const char* ascii_fingerprint; // = "590749F5B2844758224774B43EF73603";
+  static const uint8_t binary_fingerprint[16]; // = {0x59,0x07,0x49,0xF5,0xB2,0x84,0x47,0x58,0x22,0x47,0x74,0xB4,0x3E,0xF7,0x36,0x03};
 
   BootstrapInfo() {
   }

@@ -232,6 +232,18 @@ LimitsConstants::LimitsConstants() {
 
   EDAM_CONTENT_CLASS_FOOD_MEAL = "evernote.food.meal";
 
+  EDAM_CONTENT_CLASS_SKITCH = "evernote.skitch";
+
+  EDAM_RELATED_PLAINTEXT_LEN_MIN = 1;
+
+  EDAM_RELATED_PLAINTEXT_LEN_MAX = 131072;
+
+  EDAM_RELATED_MAX_NOTES = 25;
+
+  EDAM_RELATED_MAX_NOTEBOOKS = 1;
+
+  EDAM_RELATED_MAX_TAGS = 25;
+
 }
 
 }} // namespace

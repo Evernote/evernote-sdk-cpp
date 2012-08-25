@@ -121,6 +121,12 @@ class LimitsConstants {
   std::string EDAM_CONTENT_CLASS_HELLO_ENCOUNTER;
   std::string EDAM_CONTENT_CLASS_HELLO_PROFILE;
   std::string EDAM_CONTENT_CLASS_FOOD_MEAL;
+  std::string EDAM_CONTENT_CLASS_SKITCH;
+  int32_t EDAM_RELATED_PLAINTEXT_LEN_MIN;
+  int32_t EDAM_RELATED_PLAINTEXT_LEN_MAX;
+  int32_t EDAM_RELATED_MAX_NOTES;
+  int32_t EDAM_RELATED_MAX_NOTEBOOKS;
+  int32_t EDAM_RELATED_MAX_TAGS;
 };
 
 extern const LimitsConstants g_Limits_constants;

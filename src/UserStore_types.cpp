@@ -464,8 +464,8 @@ uint32_t AuthenticationResult::write(::apache::thrift::protocol::TProtocol* opro
   return xfer;
 }
 
-const char* BootstrapSettings::ascii_fingerprint = "3419C0A13B768EA9DB70C9DB8AC18624";
-const uint8_t BootstrapSettings::binary_fingerprint[16] = {0x34,0x19,0xC0,0xA1,0x3B,0x76,0x8E,0xA9,0xDB,0x70,0xC9,0xDB,0x8A,0xC1,0x86,0x24};
+const char* BootstrapSettings::ascii_fingerprint = "8090B65B701C6C2E81ED1017FE437B1A";
+const uint8_t BootstrapSettings::binary_fingerprint[16] = {0x80,0x90,0xB6,0x5B,0x70,0x1C,0x6C,0x2E,0x81,0xED,0x10,0x17,0xFE,0x43,0x7B,0x1A};
 
 uint32_t BootstrapSettings::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -579,6 +579,14 @@ uint32_t BootstrapSettings::read(::apache::thrift::protocol::TProtocol* iprot) {
           xfer += iprot->skip(ftype);
         }
         break;
+      case 12:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->enableLinkedInSharing);
+          this->__isset.enableLinkedInSharing = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -649,13 +657,18 @@ uint32_t BootstrapSettings::write(::apache::thrift::protocol::TProtocol* oprot) 
     xfer += oprot->writeBool(this->enableTwitterSharing);
     xfer += oprot->writeFieldEnd();
   }
+  if (this->__isset.enableLinkedInSharing) {
+    xfer += oprot->writeFieldBegin("enableLinkedInSharing", ::apache::thrift::protocol::T_BOOL, 12);
+    xfer += oprot->writeBool(this->enableLinkedInSharing);
+    xfer += oprot->writeFieldEnd();
+  }
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-const char* BootstrapProfile::ascii_fingerprint = "EB65540F13576566FA9A11C6E66235D1";
-const uint8_t BootstrapProfile::binary_fingerprint[16] = {0xEB,0x65,0x54,0x0F,0x13,0x57,0x65,0x66,0xFA,0x9A,0x11,0xC6,0xE6,0x62,0x35,0xD1};
+const char* BootstrapProfile::ascii_fingerprint = "F08DD366855A088C3D9A0CF696FDB702";
+const uint8_t BootstrapProfile::binary_fingerprint[16] = {0xF0,0x8D,0xD3,0x66,0x85,0x5A,0x08,0x8C,0x3D,0x9A,0x0C,0xF6,0x96,0xFD,0xB7,0x02};
 
 uint32_t BootstrapProfile::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -725,8 +738,8 @@ uint32_t BootstrapProfile::write(::apache::thrift::protocol::TProtocol* oprot) c
   return xfer;
 }
 
-const char* BootstrapInfo::ascii_fingerprint = "F58F1BBA49CBAFA58A368FB854546947";
-const uint8_t BootstrapInfo::binary_fingerprint[16] = {0xF5,0x8F,0x1B,0xBA,0x49,0xCB,0xAF,0xA5,0x8A,0x36,0x8F,0xB8,0x54,0x54,0x69,0x47};
+const char* BootstrapInfo::ascii_fingerprint = "590749F5B2844758224774B43EF73603";
+const uint8_t BootstrapInfo::binary_fingerprint[16] = {0x59,0x07,0x49,0xF5,0xB2,0x84,0x47,0x58,0x22,0x47,0x74,0xB4,0x3E,0xF7,0x36,0x03};
 
 uint32_t BootstrapInfo::read(::apache::thrift::protocol::TProtocol* iprot) {
 

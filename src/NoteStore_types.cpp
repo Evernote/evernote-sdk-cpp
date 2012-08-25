@@ -2336,4 +2336,297 @@ uint32_t ClientUsageMetrics::write(::apache::thrift::protocol::TProtocol* oprot)
   return xfer;
 }
 
+const char* RelatedQuery::ascii_fingerprint = "D0297FC5011701BD87898CC36146A565";
+const uint8_t RelatedQuery::binary_fingerprint[16] = {0xD0,0x29,0x7F,0xC5,0x01,0x17,0x01,0xBD,0x87,0x89,0x8C,0xC3,0x61,0x46,0xA5,0x65};
+
+uint32_t RelatedQuery::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->noteGuid);
+          this->__isset.noteGuid = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->plainText);
+          this->__isset.plainText = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RelatedQuery::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RelatedQuery");
+  if (this->__isset.noteGuid) {
+    xfer += oprot->writeFieldBegin("noteGuid", ::apache::thrift::protocol::T_STRING, 1);
+    xfer += oprot->writeString(this->noteGuid);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.plainText) {
+    xfer += oprot->writeFieldBegin("plainText", ::apache::thrift::protocol::T_STRING, 2);
+    xfer += oprot->writeString(this->plainText);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+const char* RelatedResult::ascii_fingerprint = "8FB94C5E70BE9EFE1A25B683D762E68A";
+const uint8_t RelatedResult::binary_fingerprint[16] = {0x8F,0xB9,0x4C,0x5E,0x70,0xBE,0x9E,0xFE,0x1A,0x25,0xB6,0x83,0xD7,0x62,0xE6,0x8A};
+
+uint32_t RelatedResult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_LIST) {
+          {
+            this->notes.clear();
+            uint32_t _size156;
+            ::apache::thrift::protocol::TType _etype159;
+            iprot->readListBegin(_etype159, _size156);
+            this->notes.resize(_size156);
+            uint32_t _i160;
+            for (_i160 = 0; _i160 < _size156; ++_i160)
+            {
+              xfer += this->notes[_i160].read(iprot);
+            }
+            iprot->readListEnd();
+          }
+          this->__isset.notes = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_LIST) {
+          {
+            this->notebooks.clear();
+            uint32_t _size161;
+            ::apache::thrift::protocol::TType _etype164;
+            iprot->readListBegin(_etype164, _size161);
+            this->notebooks.resize(_size161);
+            uint32_t _i165;
+            for (_i165 = 0; _i165 < _size161; ++_i165)
+            {
+              xfer += this->notebooks[_i165].read(iprot);
+            }
+            iprot->readListEnd();
+          }
+          this->__isset.notebooks = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 3:
+        if (ftype == ::apache::thrift::protocol::T_LIST) {
+          {
+            this->tags.clear();
+            uint32_t _size166;
+            ::apache::thrift::protocol::TType _etype169;
+            iprot->readListBegin(_etype169, _size166);
+            this->tags.resize(_size166);
+            uint32_t _i170;
+            for (_i170 = 0; _i170 < _size166; ++_i170)
+            {
+              xfer += this->tags[_i170].read(iprot);
+            }
+            iprot->readListEnd();
+          }
+          this->__isset.tags = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RelatedResult::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RelatedResult");
+  if (this->__isset.notes) {
+    xfer += oprot->writeFieldBegin("notes", ::apache::thrift::protocol::T_LIST, 1);
+    {
+      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, this->notes.size());
+      std::vector<evernote::edam::Note> ::const_iterator _iter171;
+      for (_iter171 = this->notes.begin(); _iter171 != this->notes.end(); ++_iter171)
+      {
+        xfer += (*_iter171).write(oprot);
+      }
+      xfer += oprot->writeListEnd();
+    }
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.notebooks) {
+    xfer += oprot->writeFieldBegin("notebooks", ::apache::thrift::protocol::T_LIST, 2);
+    {
+      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, this->notebooks.size());
+      std::vector<evernote::edam::Notebook> ::const_iterator _iter172;
+      for (_iter172 = this->notebooks.begin(); _iter172 != this->notebooks.end(); ++_iter172)
+      {
+        xfer += (*_iter172).write(oprot);
+      }
+      xfer += oprot->writeListEnd();
+    }
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.tags) {
+    xfer += oprot->writeFieldBegin("tags", ::apache::thrift::protocol::T_LIST, 3);
+    {
+      xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, this->tags.size());
+      std::vector<evernote::edam::Tag> ::const_iterator _iter173;
+      for (_iter173 = this->tags.begin(); _iter173 != this->tags.end(); ++_iter173)
+      {
+        xfer += (*_iter173).write(oprot);
+      }
+      xfer += oprot->writeListEnd();
+    }
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+const char* RelatedResultSpec::ascii_fingerprint = "CE4F8A673F7F1EE0C3F9D3A7932473D6";
+const uint8_t RelatedResultSpec::binary_fingerprint[16] = {0xCE,0x4F,0x8A,0x67,0x3F,0x7F,0x1E,0xE0,0xC3,0xF9,0xD3,0xA7,0x93,0x24,0x73,0xD6};
+
+uint32_t RelatedResultSpec::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->maxNotes);
+          this->__isset.maxNotes = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->maxNotebooks);
+          this->__isset.maxNotebooks = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 3:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->maxTags);
+          this->__isset.maxTags = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RelatedResultSpec::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RelatedResultSpec");
+  if (this->__isset.maxNotes) {
+    xfer += oprot->writeFieldBegin("maxNotes", ::apache::thrift::protocol::T_I32, 1);
+    xfer += oprot->writeI32(this->maxNotes);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.maxNotebooks) {
+    xfer += oprot->writeFieldBegin("maxNotebooks", ::apache::thrift::protocol::T_I32, 2);
+    xfer += oprot->writeI32(this->maxNotebooks);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.maxTags) {
+    xfer += oprot->writeFieldBegin("maxTags", ::apache::thrift::protocol::T_I32, 3);
+    xfer += oprot->writeI32(this->maxTags);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
 }} // namespace
