@@ -71,11 +71,9 @@ class NoteStoreIf {
   virtual void getResourceRecognition(std::string& _return, const std::string& authenticationToken, const evernote::edam::Guid& guid) = 0;
   virtual void getResourceAlternateData(std::string& _return, const std::string& authenticationToken, const evernote::edam::Guid& guid) = 0;
   virtual void getResourceAttributes(evernote::edam::ResourceAttributes& _return, const std::string& authenticationToken, const evernote::edam::Guid& guid) = 0;
-  virtual int64_t getAccountSize(const std::string& authenticationToken) = 0;
-  virtual void getAds(std::vector<evernote::edam::Ad> & _return, const std::string& authenticationToken, const AdParameters& adParameters) = 0;
-  virtual void getRandomAd(evernote::edam::Ad& _return, const std::string& authenticationToken, const AdParameters& adParameters) = 0;
   virtual void getPublicNotebook(evernote::edam::Notebook& _return, const evernote::edam::UserID userId, const std::string& publicUri) = 0;
   virtual void createSharedNotebook(evernote::edam::SharedNotebook& _return, const std::string& authenticationToken, const evernote::edam::SharedNotebook& sharedNotebook) = 0;
+  virtual int32_t updateSharedNotebook(const std::string& authenticationToken, const evernote::edam::SharedNotebook& sharedNotebook) = 0;
   virtual int32_t sendMessageToSharedNotebookMembers(const std::string& authenticationToken, const evernote::edam::Guid& notebookGuid, const std::string& messageText, const std::vector<std::string> & recipients) = 0;
   virtual void listSharedNotebooks(std::vector<evernote::edam::SharedNotebook> & _return, const std::string& authenticationToken) = 0;
   virtual int32_t expungeSharedNotebooks(const std::string& authenticationToken, const std::vector<int64_t> & sharedNotebookIds) = 0;
@@ -282,21 +280,15 @@ class NoteStoreNull : virtual public NoteStoreIf {
   void getResourceAttributes(evernote::edam::ResourceAttributes& /* _return */, const std::string& /* authenticationToken */, const evernote::edam::Guid& /* guid */) {
     return;
   }
-  int64_t getAccountSize(const std::string& /* authenticationToken */) {
-    int64_t _return = 0;
-    return _return;
-  }
-  void getAds(std::vector<evernote::edam::Ad> & /* _return */, const std::string& /* authenticationToken */, const AdParameters& /* adParameters */) {
-    return;
-  }
-  void getRandomAd(evernote::edam::Ad& /* _return */, const std::string& /* authenticationToken */, const AdParameters& /* adParameters */) {
-    return;
-  }
   void getPublicNotebook(evernote::edam::Notebook& /* _return */, const evernote::edam::UserID /* userId */, const std::string& /* publicUri */) {
     return;
   }
   void createSharedNotebook(evernote::edam::SharedNotebook& /* _return */, const std::string& /* authenticationToken */, const evernote::edam::SharedNotebook& /* sharedNotebook */) {
     return;
+  }
+  int32_t updateSharedNotebook(const std::string& /* authenticationToken */, const evernote::edam::SharedNotebook& /* sharedNotebook */) {
+    int32_t _return = 0;
+    return _return;
   }
   int32_t sendMessageToSharedNotebookMembers(const std::string& /* authenticationToken */, const evernote::edam::Guid& /* notebookGuid */, const std::string& /* messageText */, const std::vector<std::string> & /* recipients */) {
     int32_t _return = 0;
@@ -7460,352 +7452,6 @@ class NoteStore_getResourceAttributes_presult {
 
 };
 
-typedef struct _NoteStore_getAccountSize_args__isset {
-  _NoteStore_getAccountSize_args__isset() : authenticationToken(false) {}
-  bool authenticationToken;
-} _NoteStore_getAccountSize_args__isset;
-
-class NoteStore_getAccountSize_args {
- public:
-
-  NoteStore_getAccountSize_args() : authenticationToken("") {
-  }
-
-  virtual ~NoteStore_getAccountSize_args() throw() {}
-
-  std::string authenticationToken;
-
-  _NoteStore_getAccountSize_args__isset __isset;
-
-  bool operator == (const NoteStore_getAccountSize_args & rhs) const
-  {
-    if (!(authenticationToken == rhs.authenticationToken))
-      return false;
-    return true;
-  }
-  bool operator != (const NoteStore_getAccountSize_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NoteStore_getAccountSize_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class NoteStore_getAccountSize_pargs {
- public:
-
-
-  virtual ~NoteStore_getAccountSize_pargs() throw() {}
-
-  const std::string* authenticationToken;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _NoteStore_getAccountSize_result__isset {
-  _NoteStore_getAccountSize_result__isset() : success(false), userException(false), systemException(false) {}
-  bool success;
-  bool userException;
-  bool systemException;
-} _NoteStore_getAccountSize_result__isset;
-
-class NoteStore_getAccountSize_result {
- public:
-
-  NoteStore_getAccountSize_result() : success(0) {
-  }
-
-  virtual ~NoteStore_getAccountSize_result() throw() {}
-
-  int64_t success;
-  evernote::edam::EDAMUserException userException;
-  evernote::edam::EDAMSystemException systemException;
-
-  _NoteStore_getAccountSize_result__isset __isset;
-
-  bool operator == (const NoteStore_getAccountSize_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    if (!(userException == rhs.userException))
-      return false;
-    if (!(systemException == rhs.systemException))
-      return false;
-    return true;
-  }
-  bool operator != (const NoteStore_getAccountSize_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NoteStore_getAccountSize_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _NoteStore_getAccountSize_presult__isset {
-  _NoteStore_getAccountSize_presult__isset() : success(false), userException(false), systemException(false) {}
-  bool success;
-  bool userException;
-  bool systemException;
-} _NoteStore_getAccountSize_presult__isset;
-
-class NoteStore_getAccountSize_presult {
- public:
-
-
-  virtual ~NoteStore_getAccountSize_presult() throw() {}
-
-  int64_t* success;
-  evernote::edam::EDAMUserException userException;
-  evernote::edam::EDAMSystemException systemException;
-
-  _NoteStore_getAccountSize_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _NoteStore_getAds_args__isset {
-  _NoteStore_getAds_args__isset() : authenticationToken(false), adParameters(false) {}
-  bool authenticationToken;
-  bool adParameters;
-} _NoteStore_getAds_args__isset;
-
-class NoteStore_getAds_args {
- public:
-
-  NoteStore_getAds_args() : authenticationToken("") {
-  }
-
-  virtual ~NoteStore_getAds_args() throw() {}
-
-  std::string authenticationToken;
-  AdParameters adParameters;
-
-  _NoteStore_getAds_args__isset __isset;
-
-  bool operator == (const NoteStore_getAds_args & rhs) const
-  {
-    if (!(authenticationToken == rhs.authenticationToken))
-      return false;
-    if (!(adParameters == rhs.adParameters))
-      return false;
-    return true;
-  }
-  bool operator != (const NoteStore_getAds_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NoteStore_getAds_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class NoteStore_getAds_pargs {
- public:
-
-
-  virtual ~NoteStore_getAds_pargs() throw() {}
-
-  const std::string* authenticationToken;
-  const AdParameters* adParameters;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _NoteStore_getAds_result__isset {
-  _NoteStore_getAds_result__isset() : success(false), userException(false), systemException(false) {}
-  bool success;
-  bool userException;
-  bool systemException;
-} _NoteStore_getAds_result__isset;
-
-class NoteStore_getAds_result {
- public:
-
-  NoteStore_getAds_result() {
-  }
-
-  virtual ~NoteStore_getAds_result() throw() {}
-
-  std::vector<evernote::edam::Ad>  success;
-  evernote::edam::EDAMUserException userException;
-  evernote::edam::EDAMSystemException systemException;
-
-  _NoteStore_getAds_result__isset __isset;
-
-  bool operator == (const NoteStore_getAds_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    if (!(userException == rhs.userException))
-      return false;
-    if (!(systemException == rhs.systemException))
-      return false;
-    return true;
-  }
-  bool operator != (const NoteStore_getAds_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NoteStore_getAds_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _NoteStore_getAds_presult__isset {
-  _NoteStore_getAds_presult__isset() : success(false), userException(false), systemException(false) {}
-  bool success;
-  bool userException;
-  bool systemException;
-} _NoteStore_getAds_presult__isset;
-
-class NoteStore_getAds_presult {
- public:
-
-
-  virtual ~NoteStore_getAds_presult() throw() {}
-
-  std::vector<evernote::edam::Ad> * success;
-  evernote::edam::EDAMUserException userException;
-  evernote::edam::EDAMSystemException systemException;
-
-  _NoteStore_getAds_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _NoteStore_getRandomAd_args__isset {
-  _NoteStore_getRandomAd_args__isset() : authenticationToken(false), adParameters(false) {}
-  bool authenticationToken;
-  bool adParameters;
-} _NoteStore_getRandomAd_args__isset;
-
-class NoteStore_getRandomAd_args {
- public:
-
-  NoteStore_getRandomAd_args() : authenticationToken("") {
-  }
-
-  virtual ~NoteStore_getRandomAd_args() throw() {}
-
-  std::string authenticationToken;
-  AdParameters adParameters;
-
-  _NoteStore_getRandomAd_args__isset __isset;
-
-  bool operator == (const NoteStore_getRandomAd_args & rhs) const
-  {
-    if (!(authenticationToken == rhs.authenticationToken))
-      return false;
-    if (!(adParameters == rhs.adParameters))
-      return false;
-    return true;
-  }
-  bool operator != (const NoteStore_getRandomAd_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NoteStore_getRandomAd_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class NoteStore_getRandomAd_pargs {
- public:
-
-
-  virtual ~NoteStore_getRandomAd_pargs() throw() {}
-
-  const std::string* authenticationToken;
-  const AdParameters* adParameters;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _NoteStore_getRandomAd_result__isset {
-  _NoteStore_getRandomAd_result__isset() : success(false), userException(false), systemException(false) {}
-  bool success;
-  bool userException;
-  bool systemException;
-} _NoteStore_getRandomAd_result__isset;
-
-class NoteStore_getRandomAd_result {
- public:
-
-  NoteStore_getRandomAd_result() {
-  }
-
-  virtual ~NoteStore_getRandomAd_result() throw() {}
-
-  evernote::edam::Ad success;
-  evernote::edam::EDAMUserException userException;
-  evernote::edam::EDAMSystemException systemException;
-
-  _NoteStore_getRandomAd_result__isset __isset;
-
-  bool operator == (const NoteStore_getRandomAd_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    if (!(userException == rhs.userException))
-      return false;
-    if (!(systemException == rhs.systemException))
-      return false;
-    return true;
-  }
-  bool operator != (const NoteStore_getRandomAd_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NoteStore_getRandomAd_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _NoteStore_getRandomAd_presult__isset {
-  _NoteStore_getRandomAd_presult__isset() : success(false), userException(false), systemException(false) {}
-  bool success;
-  bool userException;
-  bool systemException;
-} _NoteStore_getRandomAd_presult__isset;
-
-class NoteStore_getRandomAd_presult {
- public:
-
-
-  virtual ~NoteStore_getRandomAd_presult() throw() {}
-
-  evernote::edam::Ad* success;
-  evernote::edam::EDAMUserException userException;
-  evernote::edam::EDAMSystemException systemException;
-
-  _NoteStore_getRandomAd_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
 typedef struct _NoteStore_getPublicNotebook_args__isset {
   _NoteStore_getPublicNotebook_args__isset() : userId(false), publicUri(false) {}
   bool userId;
@@ -8041,6 +7687,129 @@ class NoteStore_createSharedNotebook_presult {
   evernote::edam::EDAMSystemException systemException;
 
   _NoteStore_createSharedNotebook_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _NoteStore_updateSharedNotebook_args__isset {
+  _NoteStore_updateSharedNotebook_args__isset() : authenticationToken(false), sharedNotebook(false) {}
+  bool authenticationToken;
+  bool sharedNotebook;
+} _NoteStore_updateSharedNotebook_args__isset;
+
+class NoteStore_updateSharedNotebook_args {
+ public:
+
+  NoteStore_updateSharedNotebook_args() : authenticationToken("") {
+  }
+
+  virtual ~NoteStore_updateSharedNotebook_args() throw() {}
+
+  std::string authenticationToken;
+  evernote::edam::SharedNotebook sharedNotebook;
+
+  _NoteStore_updateSharedNotebook_args__isset __isset;
+
+  bool operator == (const NoteStore_updateSharedNotebook_args & rhs) const
+  {
+    if (!(authenticationToken == rhs.authenticationToken))
+      return false;
+    if (!(sharedNotebook == rhs.sharedNotebook))
+      return false;
+    return true;
+  }
+  bool operator != (const NoteStore_updateSharedNotebook_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const NoteStore_updateSharedNotebook_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class NoteStore_updateSharedNotebook_pargs {
+ public:
+
+
+  virtual ~NoteStore_updateSharedNotebook_pargs() throw() {}
+
+  const std::string* authenticationToken;
+  const evernote::edam::SharedNotebook* sharedNotebook;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _NoteStore_updateSharedNotebook_result__isset {
+  _NoteStore_updateSharedNotebook_result__isset() : success(false), userException(false), notFoundException(false), systemException(false) {}
+  bool success;
+  bool userException;
+  bool notFoundException;
+  bool systemException;
+} _NoteStore_updateSharedNotebook_result__isset;
+
+class NoteStore_updateSharedNotebook_result {
+ public:
+
+  NoteStore_updateSharedNotebook_result() : success(0) {
+  }
+
+  virtual ~NoteStore_updateSharedNotebook_result() throw() {}
+
+  int32_t success;
+  evernote::edam::EDAMUserException userException;
+  evernote::edam::EDAMNotFoundException notFoundException;
+  evernote::edam::EDAMSystemException systemException;
+
+  _NoteStore_updateSharedNotebook_result__isset __isset;
+
+  bool operator == (const NoteStore_updateSharedNotebook_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    if (!(userException == rhs.userException))
+      return false;
+    if (!(notFoundException == rhs.notFoundException))
+      return false;
+    if (!(systemException == rhs.systemException))
+      return false;
+    return true;
+  }
+  bool operator != (const NoteStore_updateSharedNotebook_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const NoteStore_updateSharedNotebook_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _NoteStore_updateSharedNotebook_presult__isset {
+  _NoteStore_updateSharedNotebook_presult__isset() : success(false), userException(false), notFoundException(false), systemException(false) {}
+  bool success;
+  bool userException;
+  bool notFoundException;
+  bool systemException;
+} _NoteStore_updateSharedNotebook_presult__isset;
+
+class NoteStore_updateSharedNotebook_presult {
+ public:
+
+
+  virtual ~NoteStore_updateSharedNotebook_presult() throw() {}
+
+  int32_t* success;
+  evernote::edam::EDAMUserException userException;
+  evernote::edam::EDAMNotFoundException notFoundException;
+  evernote::edam::EDAMSystemException systemException;
+
+  _NoteStore_updateSharedNotebook_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -9947,21 +9716,15 @@ class NoteStoreClient : virtual public NoteStoreIf {
   void getResourceAttributes(evernote::edam::ResourceAttributes& _return, const std::string& authenticationToken, const evernote::edam::Guid& guid);
   void send_getResourceAttributes(const std::string& authenticationToken, const evernote::edam::Guid& guid);
   void recv_getResourceAttributes(evernote::edam::ResourceAttributes& _return);
-  int64_t getAccountSize(const std::string& authenticationToken);
-  void send_getAccountSize(const std::string& authenticationToken);
-  int64_t recv_getAccountSize();
-  void getAds(std::vector<evernote::edam::Ad> & _return, const std::string& authenticationToken, const AdParameters& adParameters);
-  void send_getAds(const std::string& authenticationToken, const AdParameters& adParameters);
-  void recv_getAds(std::vector<evernote::edam::Ad> & _return);
-  void getRandomAd(evernote::edam::Ad& _return, const std::string& authenticationToken, const AdParameters& adParameters);
-  void send_getRandomAd(const std::string& authenticationToken, const AdParameters& adParameters);
-  void recv_getRandomAd(evernote::edam::Ad& _return);
   void getPublicNotebook(evernote::edam::Notebook& _return, const evernote::edam::UserID userId, const std::string& publicUri);
   void send_getPublicNotebook(const evernote::edam::UserID userId, const std::string& publicUri);
   void recv_getPublicNotebook(evernote::edam::Notebook& _return);
   void createSharedNotebook(evernote::edam::SharedNotebook& _return, const std::string& authenticationToken, const evernote::edam::SharedNotebook& sharedNotebook);
   void send_createSharedNotebook(const std::string& authenticationToken, const evernote::edam::SharedNotebook& sharedNotebook);
   void recv_createSharedNotebook(evernote::edam::SharedNotebook& _return);
+  int32_t updateSharedNotebook(const std::string& authenticationToken, const evernote::edam::SharedNotebook& sharedNotebook);
+  void send_updateSharedNotebook(const std::string& authenticationToken, const evernote::edam::SharedNotebook& sharedNotebook);
+  int32_t recv_updateSharedNotebook();
   int32_t sendMessageToSharedNotebookMembers(const std::string& authenticationToken, const evernote::edam::Guid& notebookGuid, const std::string& messageText, const std::vector<std::string> & recipients);
   void send_sendMessageToSharedNotebookMembers(const std::string& authenticationToken, const evernote::edam::Guid& notebookGuid, const std::string& messageText, const std::vector<std::string> & recipients);
   int32_t recv_sendMessageToSharedNotebookMembers();
@@ -10074,11 +9837,9 @@ class NoteStoreProcessor : virtual public ::apache::thrift::TProcessor {
   void process_getResourceRecognition(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_getResourceAlternateData(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_getResourceAttributes(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_getAccountSize(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_getAds(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
-  void process_getRandomAd(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_getPublicNotebook(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_createSharedNotebook(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_updateSharedNotebook(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_sendMessageToSharedNotebookMembers(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_listSharedNotebooks(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_expungeSharedNotebooks(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
@@ -10153,11 +9914,9 @@ class NoteStoreProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["getResourceRecognition"] = &NoteStoreProcessor::process_getResourceRecognition;
     processMap_["getResourceAlternateData"] = &NoteStoreProcessor::process_getResourceAlternateData;
     processMap_["getResourceAttributes"] = &NoteStoreProcessor::process_getResourceAttributes;
-    processMap_["getAccountSize"] = &NoteStoreProcessor::process_getAccountSize;
-    processMap_["getAds"] = &NoteStoreProcessor::process_getAds;
-    processMap_["getRandomAd"] = &NoteStoreProcessor::process_getRandomAd;
     processMap_["getPublicNotebook"] = &NoteStoreProcessor::process_getPublicNotebook;
     processMap_["createSharedNotebook"] = &NoteStoreProcessor::process_createSharedNotebook;
+    processMap_["updateSharedNotebook"] = &NoteStoreProcessor::process_updateSharedNotebook;
     processMap_["sendMessageToSharedNotebookMembers"] = &NoteStoreProcessor::process_sendMessageToSharedNotebookMembers;
     processMap_["listSharedNotebooks"] = &NoteStoreProcessor::process_listSharedNotebooks;
     processMap_["expungeSharedNotebooks"] = &NoteStoreProcessor::process_expungeSharedNotebooks;
@@ -10853,41 +10612,6 @@ class NoteStoreMultiface : virtual public NoteStoreIf {
     }
   }
 
-  int64_t getAccountSize(const std::string& authenticationToken) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->getAccountSize(authenticationToken);
-      } else {
-        ifaces_[i]->getAccountSize(authenticationToken);
-      }
-    }
-  }
-
-  void getAds(std::vector<evernote::edam::Ad> & _return, const std::string& authenticationToken, const AdParameters& adParameters) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        ifaces_[i]->getAds(_return, authenticationToken, adParameters);
-        return;
-      } else {
-        ifaces_[i]->getAds(_return, authenticationToken, adParameters);
-      }
-    }
-  }
-
-  void getRandomAd(evernote::edam::Ad& _return, const std::string& authenticationToken, const AdParameters& adParameters) {
-    uint32_t sz = ifaces_.size();
-    for (uint32_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        ifaces_[i]->getRandomAd(_return, authenticationToken, adParameters);
-        return;
-      } else {
-        ifaces_[i]->getRandomAd(_return, authenticationToken, adParameters);
-      }
-    }
-  }
-
   void getPublicNotebook(evernote::edam::Notebook& _return, const evernote::edam::UserID userId, const std::string& publicUri) {
     uint32_t sz = ifaces_.size();
     for (uint32_t i = 0; i < sz; ++i) {
@@ -10908,6 +10632,17 @@ class NoteStoreMultiface : virtual public NoteStoreIf {
         return;
       } else {
         ifaces_[i]->createSharedNotebook(_return, authenticationToken, sharedNotebook);
+      }
+    }
+  }
+
+  int32_t updateSharedNotebook(const std::string& authenticationToken, const evernote::edam::SharedNotebook& sharedNotebook) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->updateSharedNotebook(authenticationToken, sharedNotebook);
+      } else {
+        ifaces_[i]->updateSharedNotebook(authenticationToken, sharedNotebook);
       }
     }
   }
