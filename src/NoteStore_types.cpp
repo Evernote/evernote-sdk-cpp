@@ -105,8 +105,8 @@ uint32_t SyncState::write(::apache::thrift::protocol::TProtocol* oprot) const {
   return xfer;
 }
 
-const char* SyncChunk::ascii_fingerprint = "20A441A1EFC4392D73AB88C4F0107C2B";
-const uint8_t SyncChunk::binary_fingerprint[16] = {0x20,0xA4,0x41,0xA1,0xEF,0xC4,0x39,0x2D,0x73,0xAB,0x88,0xC4,0xF0,0x10,0x7C,0x2B};
+const char* SyncChunk::ascii_fingerprint = "F3ACA431C6359CF91468373FE27A299F";
+const uint8_t SyncChunk::binary_fingerprint[16] = {0xF3,0xAC,0xA4,0x31,0xC6,0x35,0x9C,0xF9,0x14,0x68,0x37,0x3F,0xE2,0x7A,0x29,0x9F};
 
 uint32_t SyncChunk::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -931,8 +931,8 @@ uint32_t NoteFilter::write(::apache::thrift::protocol::TProtocol* oprot) const {
   return xfer;
 }
 
-const char* NoteList::ascii_fingerprint = "CE2F7250677813368E2387275337ED1E";
-const uint8_t NoteList::binary_fingerprint[16] = {0xCE,0x2F,0x72,0x50,0x67,0x78,0x13,0x36,0x8E,0x23,0x87,0x27,0x53,0x37,0xED,0x1E};
+const char* NoteList::ascii_fingerprint = "247438EE9CE5000387EA7622BA67FF05";
+const uint8_t NoteList::binary_fingerprint[16] = {0x24,0x74,0x38,0xEE,0x9C,0xE5,0x00,0x03,0x87,0xEA,0x76,0x22,0xBA,0x67,0xFF,0x05};
 
 uint32_t NoteList::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -1115,8 +1115,8 @@ uint32_t NoteList::write(::apache::thrift::protocol::TProtocol* oprot) const {
   return xfer;
 }
 
-const char* NoteMetadata::ascii_fingerprint = "775A062017D1BA5630CFA0816588305D";
-const uint8_t NoteMetadata::binary_fingerprint[16] = {0x77,0x5A,0x06,0x20,0x17,0xD1,0xBA,0x56,0x30,0xCF,0xA0,0x81,0x65,0x88,0x30,0x5D};
+const char* NoteMetadata::ascii_fingerprint = "1578F0E944B8153601B3E0E2A8789A90";
+const uint8_t NoteMetadata::binary_fingerprint[16] = {0x15,0x78,0xF0,0xE9,0x44,0xB8,0x15,0x36,0x01,0xB3,0xE0,0xE2,0xA8,0x78,0x9A,0x90};
 
 uint32_t NoteMetadata::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -1175,6 +1175,14 @@ uint32_t NoteMetadata::read(::apache::thrift::protocol::TProtocol* iprot) {
         if (ftype == ::apache::thrift::protocol::T_I64) {
           xfer += iprot->readI64(this->updated);
           this->__isset.updated = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 8:
+        if (ftype == ::apache::thrift::protocol::T_I64) {
+          xfer += iprot->readI64(this->deleted);
+          this->__isset.deleted = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -1279,6 +1287,11 @@ uint32_t NoteMetadata::write(::apache::thrift::protocol::TProtocol* oprot) const
     xfer += oprot->writeI64(this->updated);
     xfer += oprot->writeFieldEnd();
   }
+  if (this->__isset.deleted) {
+    xfer += oprot->writeFieldBegin("deleted", ::apache::thrift::protocol::T_I64, 8);
+    xfer += oprot->writeI64(this->deleted);
+    xfer += oprot->writeFieldEnd();
+  }
   if (this->__isset.updateSequenceNum) {
     xfer += oprot->writeFieldBegin("updateSequenceNum", ::apache::thrift::protocol::T_I32, 10);
     xfer += oprot->writeI32(this->updateSequenceNum);
@@ -1322,8 +1335,8 @@ uint32_t NoteMetadata::write(::apache::thrift::protocol::TProtocol* oprot) const
   return xfer;
 }
 
-const char* NotesMetadataList::ascii_fingerprint = "44AEB155A48293C43C0BB4F462E18FE6";
-const uint8_t NotesMetadataList::binary_fingerprint[16] = {0x44,0xAE,0xB1,0x55,0xA4,0x82,0x93,0xC4,0x3C,0x0B,0xB4,0xF4,0x62,0xE1,0x8F,0xE6};
+const char* NotesMetadataList::ascii_fingerprint = "7D013882B10E35EFC3DF012E73D7F97A";
+const uint8_t NotesMetadataList::binary_fingerprint[16] = {0x7D,0x01,0x38,0x82,0xB1,0x0E,0x35,0xEF,0xC3,0xDF,0x01,0x2E,0x73,0xD7,0xF9,0x7A};
 
 uint32_t NotesMetadataList::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -1506,8 +1519,8 @@ uint32_t NotesMetadataList::write(::apache::thrift::protocol::TProtocol* oprot) 
   return xfer;
 }
 
-const char* NotesMetadataResultSpec::ascii_fingerprint = "76B8B38B98B51F67027A0B456AD81520";
-const uint8_t NotesMetadataResultSpec::binary_fingerprint[16] = {0x76,0xB8,0xB3,0x8B,0x98,0xB5,0x1F,0x67,0x02,0x7A,0x0B,0x45,0x6A,0xD8,0x15,0x20};
+const char* NotesMetadataResultSpec::ascii_fingerprint = "E42FF48575B3338B9BDB091F4A9EBE06";
+const uint8_t NotesMetadataResultSpec::binary_fingerprint[16] = {0xE4,0x2F,0xF4,0x85,0x75,0xB3,0x33,0x8B,0x9B,0xDB,0x09,0x1F,0x4A,0x9E,0xBE,0x06};
 
 uint32_t NotesMetadataResultSpec::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -1557,6 +1570,14 @@ uint32_t NotesMetadataResultSpec::read(::apache::thrift::protocol::TProtocol* ip
         if (ftype == ::apache::thrift::protocol::T_BOOL) {
           xfer += iprot->readBool(this->includeUpdated);
           this->__isset.includeUpdated = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 8:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->includeDeleted);
+          this->__isset.includeDeleted = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -1642,6 +1663,11 @@ uint32_t NotesMetadataResultSpec::write(::apache::thrift::protocol::TProtocol* o
   if (this->__isset.includeUpdated) {
     xfer += oprot->writeFieldBegin("includeUpdated", ::apache::thrift::protocol::T_BOOL, 7);
     xfer += oprot->writeBool(this->includeUpdated);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.includeDeleted) {
+    xfer += oprot->writeFieldBegin("includeDeleted", ::apache::thrift::protocol::T_BOOL, 8);
+    xfer += oprot->writeBool(this->includeDeleted);
     xfer += oprot->writeFieldEnd();
   }
   if (this->__isset.includeUpdateSequenceNum) {
@@ -1809,8 +1835,8 @@ uint32_t NoteCollectionCounts::write(::apache::thrift::protocol::TProtocol* opro
   return xfer;
 }
 
-const char* NoteEmailParameters::ascii_fingerprint = "56FF91D4CE9612B9F3443012BA35FAD6";
-const uint8_t NoteEmailParameters::binary_fingerprint[16] = {0x56,0xFF,0x91,0xD4,0xCE,0x96,0x12,0xB9,0xF3,0x44,0x30,0x12,0xBA,0x35,0xFA,0xD6};
+const char* NoteEmailParameters::ascii_fingerprint = "843CBB049F3F618BEC63835DE8BEB534";
+const uint8_t NoteEmailParameters::binary_fingerprint[16] = {0x84,0x3C,0xBB,0x04,0x9F,0x3F,0x61,0x8B,0xEC,0x63,0x83,0x5D,0xE8,0xBE,0xB5,0x34};
 
 uint32_t NoteEmailParameters::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -2207,8 +2233,8 @@ uint32_t RelatedQuery::write(::apache::thrift::protocol::TProtocol* oprot) const
   return xfer;
 }
 
-const char* RelatedResult::ascii_fingerprint = "06C62C0870774D14F08AEBE79BF17FC9";
-const uint8_t RelatedResult::binary_fingerprint[16] = {0x06,0xC6,0x2C,0x08,0x70,0x77,0x4D,0x14,0xF0,0x8A,0xEB,0xE7,0x9B,0xF1,0x7F,0xC9};
+const char* RelatedResult::ascii_fingerprint = "01A1A2D435221A0960C9ADC5FD0A2069";
+const uint8_t RelatedResult::binary_fingerprint[16] = {0x01,0xA1,0xA2,0xD4,0x35,0x22,0x1A,0x09,0x60,0xC9,0xAD,0xC5,0xFD,0x0A,0x20,0x69};
 
 uint32_t RelatedResult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -2310,14 +2336,6 @@ uint32_t RelatedResult::read(::apache::thrift::protocol::TProtocol* iprot) {
           xfer += iprot->skip(ftype);
         }
         break;
-      case 5:
-        if (ftype == ::apache::thrift::protocol::T_STRING) {
-          xfer += iprot->readString(this->debugInfo);
-          this->__isset.debugInfo = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -2385,18 +2403,13 @@ uint32_t RelatedResult::write(::apache::thrift::protocol::TProtocol* oprot) cons
     }
     xfer += oprot->writeFieldEnd();
   }
-  if (this->__isset.debugInfo) {
-    xfer += oprot->writeFieldBegin("debugInfo", ::apache::thrift::protocol::T_STRING, 5);
-    xfer += oprot->writeString(this->debugInfo);
-    xfer += oprot->writeFieldEnd();
-  }
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-const char* RelatedResultSpec::ascii_fingerprint = "01A1DFD093FDCE31CD2872FDE4A7946D";
-const uint8_t RelatedResultSpec::binary_fingerprint[16] = {0x01,0xA1,0xDF,0xD0,0x93,0xFD,0xCE,0x31,0xCD,0x28,0x72,0xFD,0xE4,0xA7,0x94,0x6D};
+const char* RelatedResultSpec::ascii_fingerprint = "B7BD292D2A1ACF08975A53F95B397C1A";
+const uint8_t RelatedResultSpec::binary_fingerprint[16] = {0xB7,0xBD,0x29,0x2D,0x2A,0x1A,0xCF,0x08,0x97,0x5A,0x53,0xF9,0x5B,0x39,0x7C,0x1A};
 
 uint32_t RelatedResultSpec::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -2458,14 +2471,6 @@ uint32_t RelatedResultSpec::read(::apache::thrift::protocol::TProtocol* iprot) {
           xfer += iprot->skip(ftype);
         }
         break;
-      case 6:
-        if (ftype == ::apache::thrift::protocol::T_BOOL) {
-          xfer += iprot->readBool(this->includeDebugInfo);
-          this->__isset.includeDebugInfo = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -2504,11 +2509,6 @@ uint32_t RelatedResultSpec::write(::apache::thrift::protocol::TProtocol* oprot) 
   if (this->__isset.includeContainingNotebooks) {
     xfer += oprot->writeFieldBegin("includeContainingNotebooks", ::apache::thrift::protocol::T_BOOL, 5);
     xfer += oprot->writeBool(this->includeContainingNotebooks);
-    xfer += oprot->writeFieldEnd();
-  }
-  if (this->__isset.includeDebugInfo) {
-    xfer += oprot->writeFieldBegin("includeDebugInfo", ::apache::thrift::protocol::T_BOOL, 6);
-    xfer += oprot->writeBool(this->includeDebugInfo);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();

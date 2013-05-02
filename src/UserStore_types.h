@@ -91,8 +91,8 @@ typedef struct _AuthenticationResult__isset {
 class AuthenticationResult {
  public:
 
-  static const char* ascii_fingerprint; // = "B833D34A0783BF79414A90DA9ABDB79E";
-  static const uint8_t binary_fingerprint[16]; // = {0xB8,0x33,0xD3,0x4A,0x07,0x83,0xBF,0x79,0x41,0x4A,0x90,0xDA,0x9A,0xBD,0xB7,0x9E};
+  static const char* ascii_fingerprint; // = "CCC8B1354EE85C9E054690C28F5FDE50";
+  static const uint8_t binary_fingerprint[16]; // = {0xCC,0xC8,0xB1,0x35,0x4E,0xE8,0x5C,0x9E,0x05,0x46,0x90,0xC2,0x8F,0x5F,0xDE,0x50};
 
   AuthenticationResult() : currentTime(0), authenticationToken(""), expiration(0), noteStoreUrl(""), webApiUrlPrefix("") {
   }

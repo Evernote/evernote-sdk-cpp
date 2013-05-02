@@ -18,6 +18,7 @@ class UserStoreIf {
   virtual void getBootstrapInfo(BootstrapInfo& _return, const std::string& locale) = 0;
   virtual void authenticate(AuthenticationResult& _return, const std::string& username, const std::string& password, const std::string& consumerKey, const std::string& consumerSecret) = 0;
   virtual void authenticateLongSession(AuthenticationResult& _return, const std::string& username, const std::string& password, const std::string& consumerKey, const std::string& consumerSecret, const std::string& deviceIdentifier, const std::string& deviceDescription) = 0;
+  virtual void revokeLongSession(const std::string& authenticationToken) = 0;
   virtual void authenticateToBusiness(AuthenticationResult& _return, const std::string& authenticationToken) = 0;
   virtual void refreshAuthentication(AuthenticationResult& _return, const std::string& authenticationToken) = 0;
   virtual void getUser(evernote::edam::User& _return, const std::string& authenticationToken) = 0;
@@ -40,6 +41,9 @@ class UserStoreNull : virtual public UserStoreIf {
     return;
   }
   void authenticateLongSession(AuthenticationResult& /* _return */, const std::string& /* username */, const std::string& /* password */, const std::string& /* consumerKey */, const std::string& /* consumerSecret */, const std::string& /* deviceIdentifier */, const std::string& /* deviceDescription */) {
+    return;
+  }
+  void revokeLongSession(const std::string& /* authenticationToken */) {
     return;
   }
   void authenticateToBusiness(AuthenticationResult& /* _return */, const std::string& /* authenticationToken */) {
@@ -72,7 +76,7 @@ typedef struct _UserStore_checkVersion_args__isset {
 class UserStore_checkVersion_args {
  public:
 
-  UserStore_checkVersion_args() : clientName(""), edamVersionMajor(1), edamVersionMinor(23) {
+  UserStore_checkVersion_args() : clientName(""), edamVersionMajor(1), edamVersionMinor(24) {
   }
 
   virtual ~UserStore_checkVersion_args() throw() {}
@@ -531,6 +535,112 @@ class UserStore_authenticateLongSession_presult {
   evernote::edam::EDAMSystemException systemException;
 
   _UserStore_authenticateLongSession_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _UserStore_revokeLongSession_args__isset {
+  _UserStore_revokeLongSession_args__isset() : authenticationToken(false) {}
+  bool authenticationToken;
+} _UserStore_revokeLongSession_args__isset;
+
+class UserStore_revokeLongSession_args {
+ public:
+
+  UserStore_revokeLongSession_args() : authenticationToken("") {
+  }
+
+  virtual ~UserStore_revokeLongSession_args() throw() {}
+
+  std::string authenticationToken;
+
+  _UserStore_revokeLongSession_args__isset __isset;
+
+  bool operator == (const UserStore_revokeLongSession_args & rhs) const
+  {
+    if (!(authenticationToken == rhs.authenticationToken))
+      return false;
+    return true;
+  }
+  bool operator != (const UserStore_revokeLongSession_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const UserStore_revokeLongSession_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class UserStore_revokeLongSession_pargs {
+ public:
+
+
+  virtual ~UserStore_revokeLongSession_pargs() throw() {}
+
+  const std::string* authenticationToken;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _UserStore_revokeLongSession_result__isset {
+  _UserStore_revokeLongSession_result__isset() : userException(false), systemException(false) {}
+  bool userException;
+  bool systemException;
+} _UserStore_revokeLongSession_result__isset;
+
+class UserStore_revokeLongSession_result {
+ public:
+
+  UserStore_revokeLongSession_result() {
+  }
+
+  virtual ~UserStore_revokeLongSession_result() throw() {}
+
+  evernote::edam::EDAMUserException userException;
+  evernote::edam::EDAMSystemException systemException;
+
+  _UserStore_revokeLongSession_result__isset __isset;
+
+  bool operator == (const UserStore_revokeLongSession_result & rhs) const
+  {
+    if (!(userException == rhs.userException))
+      return false;
+    if (!(systemException == rhs.systemException))
+      return false;
+    return true;
+  }
+  bool operator != (const UserStore_revokeLongSession_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const UserStore_revokeLongSession_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _UserStore_revokeLongSession_presult__isset {
+  _UserStore_revokeLongSession_presult__isset() : userException(false), systemException(false) {}
+  bool userException;
+  bool systemException;
+} _UserStore_revokeLongSession_presult__isset;
+
+class UserStore_revokeLongSession_presult {
+ public:
+
+
+  virtual ~UserStore_revokeLongSession_presult() throw() {}
+
+  evernote::edam::EDAMUserException userException;
+  evernote::edam::EDAMSystemException systemException;
+
+  _UserStore_revokeLongSession_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -1246,6 +1356,9 @@ class UserStoreClient : virtual public UserStoreIf {
   void authenticateLongSession(AuthenticationResult& _return, const std::string& username, const std::string& password, const std::string& consumerKey, const std::string& consumerSecret, const std::string& deviceIdentifier, const std::string& deviceDescription);
   void send_authenticateLongSession(const std::string& username, const std::string& password, const std::string& consumerKey, const std::string& consumerSecret, const std::string& deviceIdentifier, const std::string& deviceDescription);
   void recv_authenticateLongSession(AuthenticationResult& _return);
+  void revokeLongSession(const std::string& authenticationToken);
+  void send_revokeLongSession(const std::string& authenticationToken);
+  void recv_revokeLongSession();
   void authenticateToBusiness(AuthenticationResult& _return, const std::string& authenticationToken);
   void send_authenticateToBusiness(const std::string& authenticationToken);
   void recv_authenticateToBusiness(AuthenticationResult& _return);
@@ -1281,6 +1394,7 @@ class UserStoreProcessor : virtual public ::apache::thrift::TProcessor {
   void process_getBootstrapInfo(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_authenticate(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_authenticateLongSession(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
+  void process_revokeLongSession(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_authenticateToBusiness(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_refreshAuthentication(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
   void process_getUser(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot);
@@ -1294,6 +1408,7 @@ class UserStoreProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["getBootstrapInfo"] = &UserStoreProcessor::process_getBootstrapInfo;
     processMap_["authenticate"] = &UserStoreProcessor::process_authenticate;
     processMap_["authenticateLongSession"] = &UserStoreProcessor::process_authenticateLongSession;
+    processMap_["revokeLongSession"] = &UserStoreProcessor::process_revokeLongSession;
     processMap_["authenticateToBusiness"] = &UserStoreProcessor::process_authenticateToBusiness;
     processMap_["refreshAuthentication"] = &UserStoreProcessor::process_refreshAuthentication;
     processMap_["getUser"] = &UserStoreProcessor::process_getUser;
@@ -1362,6 +1477,13 @@ class UserStoreMultiface : virtual public UserStoreIf {
       } else {
         ifaces_[i]->authenticateLongSession(_return, username, password, consumerKey, consumerSecret, deviceIdentifier, deviceDescription);
       }
+    }
+  }
+
+  void revokeLongSession(const std::string& authenticationToken) {
+    uint32_t sz = ifaces_.size();
+    for (uint32_t i = 0; i < sz; ++i) {
+      ifaces_[i]->revokeLongSession(authenticationToken);
     }
   }
 

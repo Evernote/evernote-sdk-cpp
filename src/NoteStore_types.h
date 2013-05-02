@@ -86,8 +86,8 @@ typedef struct _SyncChunk__isset {
 class SyncChunk {
  public:
 
-  static const char* ascii_fingerprint; // = "20A441A1EFC4392D73AB88C4F0107C2B";
-  static const uint8_t binary_fingerprint[16]; // = {0x20,0xA4,0x41,0xA1,0xEF,0xC4,0x39,0x2D,0x73,0xAB,0x88,0xC4,0xF0,0x10,0x7C,0x2B};
+  static const char* ascii_fingerprint; // = "F3ACA431C6359CF91468373FE27A299F";
+  static const uint8_t binary_fingerprint[16]; // = {0xF3,0xAC,0xA4,0x31,0xC6,0x35,0x9C,0xF9,0x14,0x68,0x37,0x3F,0xE2,0x7A,0x29,0x9F};
 
   SyncChunk() : currentTime(0), chunkHighUSN(0), updateCount(0) {
   }
@@ -380,8 +380,8 @@ typedef struct _NoteList__isset {
 class NoteList {
  public:
 
-  static const char* ascii_fingerprint; // = "CE2F7250677813368E2387275337ED1E";
-  static const uint8_t binary_fingerprint[16]; // = {0xCE,0x2F,0x72,0x50,0x67,0x78,0x13,0x36,0x8E,0x23,0x87,0x27,0x53,0x37,0xED,0x1E};
+  static const char* ascii_fingerprint; // = "247438EE9CE5000387EA7622BA67FF05";
+  static const uint8_t binary_fingerprint[16]; // = {0x24,0x74,0x38,0xEE,0x9C,0xE5,0x00,0x03,0x87,0xEA,0x76,0x22,0xBA,0x67,0xFF,0x05};
 
   NoteList() : startIndex(0), totalNotes(0), updateCount(0) {
   }
@@ -431,11 +431,12 @@ class NoteList {
 };
 
 typedef struct _NoteMetadata__isset {
-  _NoteMetadata__isset() : title(false), contentLength(false), created(false), updated(false), updateSequenceNum(false), notebookGuid(false), tagGuids(false), attributes(false), largestResourceMime(false), largestResourceSize(false) {}
+  _NoteMetadata__isset() : title(false), contentLength(false), created(false), updated(false), deleted(false), updateSequenceNum(false), notebookGuid(false), tagGuids(false), attributes(false), largestResourceMime(false), largestResourceSize(false) {}
   bool title;
   bool contentLength;
   bool created;
   bool updated;
+  bool deleted;
   bool updateSequenceNum;
   bool notebookGuid;
   bool tagGuids;
@@ -447,10 +448,10 @@ typedef struct _NoteMetadata__isset {
 class NoteMetadata {
  public:
 
-  static const char* ascii_fingerprint; // = "775A062017D1BA5630CFA0816588305D";
-  static const uint8_t binary_fingerprint[16]; // = {0x77,0x5A,0x06,0x20,0x17,0xD1,0xBA,0x56,0x30,0xCF,0xA0,0x81,0x65,0x88,0x30,0x5D};
+  static const char* ascii_fingerprint; // = "1578F0E944B8153601B3E0E2A8789A90";
+  static const uint8_t binary_fingerprint[16]; // = {0x15,0x78,0xF0,0xE9,0x44,0xB8,0x15,0x36,0x01,0xB3,0xE0,0xE2,0xA8,0x78,0x9A,0x90};
 
-  NoteMetadata() : guid(""), title(""), contentLength(0), created(0), updated(0), updateSequenceNum(0), notebookGuid(""), largestResourceMime(""), largestResourceSize(0) {
+  NoteMetadata() : guid(""), title(""), contentLength(0), created(0), updated(0), deleted(0), updateSequenceNum(0), notebookGuid(""), largestResourceMime(""), largestResourceSize(0) {
   }
 
   virtual ~NoteMetadata() throw() {}
@@ -460,6 +461,7 @@ class NoteMetadata {
   int32_t contentLength;
   evernote::edam::Timestamp created;
   evernote::edam::Timestamp updated;
+  evernote::edam::Timestamp deleted;
   int32_t updateSequenceNum;
   std::string notebookGuid;
   std::vector<evernote::edam::Guid>  tagGuids;
@@ -488,6 +490,10 @@ class NoteMetadata {
     if (__isset.updated != rhs.__isset.updated)
       return false;
     else if (__isset.updated && !(updated == rhs.updated))
+      return false;
+    if (__isset.deleted != rhs.__isset.deleted)
+      return false;
+    else if (__isset.deleted && !(deleted == rhs.deleted))
       return false;
     if (__isset.updateSequenceNum != rhs.__isset.updateSequenceNum)
       return false;
@@ -536,8 +542,8 @@ typedef struct _NotesMetadataList__isset {
 class NotesMetadataList {
  public:
 
-  static const char* ascii_fingerprint; // = "44AEB155A48293C43C0BB4F462E18FE6";
-  static const uint8_t binary_fingerprint[16]; // = {0x44,0xAE,0xB1,0x55,0xA4,0x82,0x93,0xC4,0x3C,0x0B,0xB4,0xF4,0x62,0xE1,0x8F,0xE6};
+  static const char* ascii_fingerprint; // = "7D013882B10E35EFC3DF012E73D7F97A";
+  static const uint8_t binary_fingerprint[16]; // = {0x7D,0x01,0x38,0x82,0xB1,0x0E,0x35,0xEF,0xC3,0xDF,0x01,0x2E,0x73,0xD7,0xF9,0x7A};
 
   NotesMetadataList() : startIndex(0), totalNotes(0), updateCount(0) {
   }
@@ -587,11 +593,12 @@ class NotesMetadataList {
 };
 
 typedef struct _NotesMetadataResultSpec__isset {
-  _NotesMetadataResultSpec__isset() : includeTitle(false), includeContentLength(false), includeCreated(false), includeUpdated(false), includeUpdateSequenceNum(false), includeNotebookGuid(false), includeTagGuids(false), includeAttributes(false), includeLargestResourceMime(false), includeLargestResourceSize(false) {}
+  _NotesMetadataResultSpec__isset() : includeTitle(false), includeContentLength(false), includeCreated(false), includeUpdated(false), includeDeleted(false), includeUpdateSequenceNum(false), includeNotebookGuid(false), includeTagGuids(false), includeAttributes(false), includeLargestResourceMime(false), includeLargestResourceSize(false) {}
   bool includeTitle;
   bool includeContentLength;
   bool includeCreated;
   bool includeUpdated;
+  bool includeDeleted;
   bool includeUpdateSequenceNum;
   bool includeNotebookGuid;
   bool includeTagGuids;
@@ -603,10 +610,10 @@ typedef struct _NotesMetadataResultSpec__isset {
 class NotesMetadataResultSpec {
  public:
 
-  static const char* ascii_fingerprint; // = "76B8B38B98B51F67027A0B456AD81520";
-  static const uint8_t binary_fingerprint[16]; // = {0x76,0xB8,0xB3,0x8B,0x98,0xB5,0x1F,0x67,0x02,0x7A,0x0B,0x45,0x6A,0xD8,0x15,0x20};
+  static const char* ascii_fingerprint; // = "E42FF48575B3338B9BDB091F4A9EBE06";
+  static const uint8_t binary_fingerprint[16]; // = {0xE4,0x2F,0xF4,0x85,0x75,0xB3,0x33,0x8B,0x9B,0xDB,0x09,0x1F,0x4A,0x9E,0xBE,0x06};
 
-  NotesMetadataResultSpec() : includeTitle(0), includeContentLength(0), includeCreated(0), includeUpdated(0), includeUpdateSequenceNum(0), includeNotebookGuid(0), includeTagGuids(0), includeAttributes(0), includeLargestResourceMime(0), includeLargestResourceSize(0) {
+  NotesMetadataResultSpec() : includeTitle(0), includeContentLength(0), includeCreated(0), includeUpdated(0), includeDeleted(0), includeUpdateSequenceNum(0), includeNotebookGuid(0), includeTagGuids(0), includeAttributes(0), includeLargestResourceMime(0), includeLargestResourceSize(0) {
   }
 
   virtual ~NotesMetadataResultSpec() throw() {}
@@ -615,6 +622,7 @@ class NotesMetadataResultSpec {
   bool includeContentLength;
   bool includeCreated;
   bool includeUpdated;
+  bool includeDeleted;
   bool includeUpdateSequenceNum;
   bool includeNotebookGuid;
   bool includeTagGuids;
@@ -641,6 +649,10 @@ class NotesMetadataResultSpec {
     if (__isset.includeUpdated != rhs.__isset.includeUpdated)
       return false;
     else if (__isset.includeUpdated && !(includeUpdated == rhs.includeUpdated))
+      return false;
+    if (__isset.includeDeleted != rhs.__isset.includeDeleted)
+      return false;
+    else if (__isset.includeDeleted && !(includeDeleted == rhs.includeDeleted))
       return false;
     if (__isset.includeUpdateSequenceNum != rhs.__isset.includeUpdateSequenceNum)
       return false;
@@ -743,8 +755,8 @@ typedef struct _NoteEmailParameters__isset {
 class NoteEmailParameters {
  public:
 
-  static const char* ascii_fingerprint; // = "56FF91D4CE9612B9F3443012BA35FAD6";
-  static const uint8_t binary_fingerprint[16]; // = {0x56,0xFF,0x91,0xD4,0xCE,0x96,0x12,0xB9,0xF3,0x44,0x30,0x12,0xBA,0x35,0xFA,0xD6};
+  static const char* ascii_fingerprint; // = "843CBB049F3F618BEC63835DE8BEB534";
+  static const uint8_t binary_fingerprint[16]; // = {0x84,0x3C,0xBB,0x04,0x9F,0x3F,0x61,0x8B,0xEC,0x63,0x83,0x5D,0xE8,0xBE,0xB5,0x34};
 
   NoteEmailParameters() : guid(""), subject(""), message("") {
   }
@@ -930,21 +942,20 @@ class RelatedQuery {
 };
 
 typedef struct _RelatedResult__isset {
-  _RelatedResult__isset() : notes(false), notebooks(false), tags(false), containingNotebooks(false), debugInfo(false) {}
+  _RelatedResult__isset() : notes(false), notebooks(false), tags(false), containingNotebooks(false) {}
   bool notes;
   bool notebooks;
   bool tags;
   bool containingNotebooks;
-  bool debugInfo;
 } _RelatedResult__isset;
 
 class RelatedResult {
  public:
 
-  static const char* ascii_fingerprint; // = "06C62C0870774D14F08AEBE79BF17FC9";
-  static const uint8_t binary_fingerprint[16]; // = {0x06,0xC6,0x2C,0x08,0x70,0x77,0x4D,0x14,0xF0,0x8A,0xEB,0xE7,0x9B,0xF1,0x7F,0xC9};
+  static const char* ascii_fingerprint; // = "01A1A2D435221A0960C9ADC5FD0A2069";
+  static const uint8_t binary_fingerprint[16]; // = {0x01,0xA1,0xA2,0xD4,0x35,0x22,0x1A,0x09,0x60,0xC9,0xAD,0xC5,0xFD,0x0A,0x20,0x69};
 
-  RelatedResult() : debugInfo("") {
+  RelatedResult() {
   }
 
   virtual ~RelatedResult() throw() {}
@@ -953,7 +964,6 @@ class RelatedResult {
   std::vector<evernote::edam::Notebook>  notebooks;
   std::vector<evernote::edam::Tag>  tags;
   std::vector<evernote::edam::NotebookDescriptor>  containingNotebooks;
-  std::string debugInfo;
 
   _RelatedResult__isset __isset;
 
@@ -975,10 +985,6 @@ class RelatedResult {
       return false;
     else if (__isset.containingNotebooks && !(containingNotebooks == rhs.containingNotebooks))
       return false;
-    if (__isset.debugInfo != rhs.__isset.debugInfo)
-      return false;
-    else if (__isset.debugInfo && !(debugInfo == rhs.debugInfo))
-      return false;
     return true;
   }
   bool operator != (const RelatedResult &rhs) const {
@@ -993,22 +999,21 @@ class RelatedResult {
 };
 
 typedef struct _RelatedResultSpec__isset {
-  _RelatedResultSpec__isset() : maxNotes(false), maxNotebooks(false), maxTags(false), writableNotebooksOnly(false), includeContainingNotebooks(false), includeDebugInfo(false) {}
+  _RelatedResultSpec__isset() : maxNotes(false), maxNotebooks(false), maxTags(false), writableNotebooksOnly(false), includeContainingNotebooks(false) {}
   bool maxNotes;
   bool maxNotebooks;
   bool maxTags;
   bool writableNotebooksOnly;
   bool includeContainingNotebooks;
-  bool includeDebugInfo;
 } _RelatedResultSpec__isset;
 
 class RelatedResultSpec {
  public:
 
-  static const char* ascii_fingerprint; // = "01A1DFD093FDCE31CD2872FDE4A7946D";
-  static const uint8_t binary_fingerprint[16]; // = {0x01,0xA1,0xDF,0xD0,0x93,0xFD,0xCE,0x31,0xCD,0x28,0x72,0xFD,0xE4,0xA7,0x94,0x6D};
+  static const char* ascii_fingerprint; // = "B7BD292D2A1ACF08975A53F95B397C1A";
+  static const uint8_t binary_fingerprint[16]; // = {0xB7,0xBD,0x29,0x2D,0x2A,0x1A,0xCF,0x08,0x97,0x5A,0x53,0xF9,0x5B,0x39,0x7C,0x1A};
 
-  RelatedResultSpec() : maxNotes(0), maxNotebooks(0), maxTags(0), writableNotebooksOnly(0), includeContainingNotebooks(0), includeDebugInfo(0) {
+  RelatedResultSpec() : maxNotes(0), maxNotebooks(0), maxTags(0), writableNotebooksOnly(0), includeContainingNotebooks(0) {
   }
 
   virtual ~RelatedResultSpec() throw() {}
@@ -1018,7 +1023,6 @@ class RelatedResultSpec {
   int32_t maxTags;
   bool writableNotebooksOnly;
   bool includeContainingNotebooks;
-  bool includeDebugInfo;
 
   _RelatedResultSpec__isset __isset;
 
@@ -1043,10 +1047,6 @@ class RelatedResultSpec {
     if (__isset.includeContainingNotebooks != rhs.__isset.includeContainingNotebooks)
       return false;
     else if (__isset.includeContainingNotebooks && !(includeContainingNotebooks == rhs.includeContainingNotebooks))
-      return false;
-    if (__isset.includeDebugInfo != rhs.__isset.includeDebugInfo)
-      return false;
-    else if (__isset.includeDebugInfo && !(includeDebugInfo == rhs.includeDebugInfo))
       return false;
     return true;
   }

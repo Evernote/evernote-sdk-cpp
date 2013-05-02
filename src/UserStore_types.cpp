@@ -132,8 +132,8 @@ uint32_t PublicUserInfo::write(::apache::thrift::protocol::TProtocol* oprot) con
   return xfer;
 }
 
-const char* AuthenticationResult::ascii_fingerprint = "B833D34A0783BF79414A90DA9ABDB79E";
-const uint8_t AuthenticationResult::binary_fingerprint[16] = {0xB8,0x33,0xD3,0x4A,0x07,0x83,0xBF,0x79,0x41,0x4A,0x90,0xDA,0x9A,0xBD,0xB7,0x9E};
+const char* AuthenticationResult::ascii_fingerprint = "CCC8B1354EE85C9E054690C28F5FDE50";
+const uint8_t AuthenticationResult::binary_fingerprint[16] = {0xCC,0xC8,0xB1,0x35,0x4E,0xE8,0x5C,0x9E,0x05,0x46,0x90,0xC2,0x8F,0x5F,0xDE,0x50};
 
 uint32_t AuthenticationResult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
