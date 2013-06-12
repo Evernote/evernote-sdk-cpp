@@ -1113,7 +1113,7 @@ class Resource {
 };
 
 typedef struct _NoteAttributes__isset {
-  _NoteAttributes__isset() : subjectDate(false), latitude(false), longitude(false), altitude(false), author(false), source(false), sourceURL(false), sourceApplication(false), shareDate(false), reminderOrder(false), reminderDoneTime(false), reminderTime(false), placeName(false), contentClass(false), applicationData(false), lastEditedBy(false), classifications(false) {}
+  _NoteAttributes__isset() : subjectDate(false), latitude(false), longitude(false), altitude(false), author(false), source(false), sourceURL(false), sourceApplication(false), shareDate(false), reminderOrder(false), reminderDoneTime(false), reminderTime(false), placeName(false), contentClass(false), applicationData(false), lastEditedBy(false), classifications(false), creatorId(false), lastEditorId(false) {}
   bool subjectDate;
   bool latitude;
   bool longitude;
@@ -1131,15 +1131,17 @@ typedef struct _NoteAttributes__isset {
   bool applicationData;
   bool lastEditedBy;
   bool classifications;
+  bool creatorId;
+  bool lastEditorId;
 } _NoteAttributes__isset;
 
 class NoteAttributes {
  public:
 
-  static const char* ascii_fingerprint; // = "51C96AF5DF1D5C48941C715E12C922CD";
-  static const uint8_t binary_fingerprint[16]; // = {0x51,0xC9,0x6A,0xF5,0xDF,0x1D,0x5C,0x48,0x94,0x1C,0x71,0x5E,0x12,0xC9,0x22,0xCD};
+  static const char* ascii_fingerprint; // = "05191C2C3618087A364FEEB9B4854C4C";
+  static const uint8_t binary_fingerprint[16]; // = {0x05,0x19,0x1C,0x2C,0x36,0x18,0x08,0x7A,0x36,0x4F,0xEE,0xB9,0xB4,0x85,0x4C,0x4C};
 
-  NoteAttributes() : subjectDate(0), latitude(0), longitude(0), altitude(0), author(""), source(""), sourceURL(""), sourceApplication(""), shareDate(0), reminderOrder(0), reminderDoneTime(0), reminderTime(0), placeName(""), contentClass(""), lastEditedBy("") {
+  NoteAttributes() : subjectDate(0), latitude(0), longitude(0), altitude(0), author(""), source(""), sourceURL(""), sourceApplication(""), shareDate(0), reminderOrder(0), reminderDoneTime(0), reminderTime(0), placeName(""), contentClass(""), lastEditedBy(""), creatorId(0), lastEditorId(0) {
   }
 
   virtual ~NoteAttributes() throw() {}
@@ -1161,6 +1163,8 @@ class NoteAttributes {
   LazyMap applicationData;
   std::string lastEditedBy;
   std::map<std::string, std::string>  classifications;
+  UserID creatorId;
+  UserID lastEditorId;
 
   _NoteAttributes__isset __isset;
 
@@ -1234,6 +1238,14 @@ class NoteAttributes {
       return false;
     else if (__isset.classifications && !(classifications == rhs.classifications))
       return false;
+    if (__isset.creatorId != rhs.__isset.creatorId)
+      return false;
+    else if (__isset.creatorId && !(creatorId == rhs.creatorId))
+      return false;
+    if (__isset.lastEditorId != rhs.__isset.lastEditorId)
+      return false;
+    else if (__isset.lastEditorId && !(lastEditorId == rhs.lastEditorId))
+      return false;
     return true;
   }
   bool operator != (const NoteAttributes &rhs) const {
@@ -1269,8 +1281,8 @@ typedef struct _Note__isset {
 class Note {
  public:
 
-  static const char* ascii_fingerprint; // = "561F08A2064D56C048636905F44C0329";
-  static const uint8_t binary_fingerprint[16]; // = {0x56,0x1F,0x08,0xA2,0x06,0x4D,0x56,0xC0,0x48,0x63,0x69,0x05,0xF4,0x4C,0x03,0x29};
+  static const char* ascii_fingerprint; // = "7353B8F6A0836D0275C7D15623BC4B42";
+  static const uint8_t binary_fingerprint[16]; // = {0x73,0x53,0xB8,0xF6,0xA0,0x83,0x6D,0x02,0x75,0xC7,0xD1,0x56,0x23,0xBC,0x4B,0x42};
 
   Note() : guid(""), title(""), content(""), contentHash(""), contentLength(0), created(0), updated(0), deleted(0), active(0), updateSequenceNum(0), notebookGuid("") {
   }
@@ -1598,8 +1610,53 @@ class SavedSearch {
 
 };
 
+typedef struct _SharedNotebookRecipientSettings__isset {
+  _SharedNotebookRecipientSettings__isset() : reminderNotifyEmail(false), reminderNotifyInApp(false) {}
+  bool reminderNotifyEmail;
+  bool reminderNotifyInApp;
+} _SharedNotebookRecipientSettings__isset;
+
+class SharedNotebookRecipientSettings {
+ public:
+
+  static const char* ascii_fingerprint; // = "1959DF646639D95C0F1375CF60F71F5B";
+  static const uint8_t binary_fingerprint[16]; // = {0x19,0x59,0xDF,0x64,0x66,0x39,0xD9,0x5C,0x0F,0x13,0x75,0xCF,0x60,0xF7,0x1F,0x5B};
+
+  SharedNotebookRecipientSettings() : reminderNotifyEmail(0), reminderNotifyInApp(0) {
+  }
+
+  virtual ~SharedNotebookRecipientSettings() throw() {}
+
+  bool reminderNotifyEmail;
+  bool reminderNotifyInApp;
+
+  _SharedNotebookRecipientSettings__isset __isset;
+
+  bool operator == (const SharedNotebookRecipientSettings & rhs) const
+  {
+    if (__isset.reminderNotifyEmail != rhs.__isset.reminderNotifyEmail)
+      return false;
+    else if (__isset.reminderNotifyEmail && !(reminderNotifyEmail == rhs.reminderNotifyEmail))
+      return false;
+    if (__isset.reminderNotifyInApp != rhs.__isset.reminderNotifyInApp)
+      return false;
+    else if (__isset.reminderNotifyInApp && !(reminderNotifyInApp == rhs.reminderNotifyInApp))
+      return false;
+    return true;
+  }
+  bool operator != (const SharedNotebookRecipientSettings &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const SharedNotebookRecipientSettings & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
 typedef struct _SharedNotebook__isset {
-  _SharedNotebook__isset() : id(false), userId(false), notebookGuid(false), email(false), notebookModifiable(false), requireLogin(false), serviceCreated(false), serviceUpdated(false), shareKey(false), username(false), privilege(false), allowPreview(false) {}
+  _SharedNotebook__isset() : id(false), userId(false), notebookGuid(false), email(false), notebookModifiable(false), requireLogin(false), serviceCreated(false), serviceUpdated(false), shareKey(false), username(false), privilege(false), allowPreview(false), recipientSettings(false) {}
   bool id;
   bool userId;
   bool notebookGuid;
@@ -1612,13 +1669,14 @@ typedef struct _SharedNotebook__isset {
   bool username;
   bool privilege;
   bool allowPreview;
+  bool recipientSettings;
 } _SharedNotebook__isset;
 
 class SharedNotebook {
  public:
 
-  static const char* ascii_fingerprint; // = "76B3B96355CD4C54BDB337E59754EACE";
-  static const uint8_t binary_fingerprint[16]; // = {0x76,0xB3,0xB9,0x63,0x55,0xCD,0x4C,0x54,0xBD,0xB3,0x37,0xE5,0x97,0x54,0xEA,0xCE};
+  static const char* ascii_fingerprint; // = "ADE8562808728688B25423E5F39AA8F5";
+  static const uint8_t binary_fingerprint[16]; // = {0xAD,0xE8,0x56,0x28,0x08,0x72,0x86,0x88,0xB2,0x54,0x23,0xE5,0xF3,0x9A,0xA8,0xF5};
 
   SharedNotebook() : id(0), userId(0), notebookGuid(""), email(""), notebookModifiable(0), requireLogin(0), serviceCreated(0), serviceUpdated(0), shareKey(""), username(""), allowPreview(0) {
   }
@@ -1637,6 +1695,7 @@ class SharedNotebook {
   std::string username;
   SharedNotebookPrivilegeLevel::type privilege;
   bool allowPreview;
+  SharedNotebookRecipientSettings recipientSettings;
 
   _SharedNotebook__isset __isset;
 
@@ -1689,6 +1748,10 @@ class SharedNotebook {
     if (__isset.allowPreview != rhs.__isset.allowPreview)
       return false;
     else if (__isset.allowPreview && !(allowPreview == rhs.allowPreview))
+      return false;
+    if (__isset.recipientSettings != rhs.__isset.recipientSettings)
+      return false;
+    else if (__isset.recipientSettings && !(recipientSettings == rhs.recipientSettings))
       return false;
     return true;
   }
@@ -1877,8 +1940,8 @@ typedef struct _Notebook__isset {
 class Notebook {
  public:
 
-  static const char* ascii_fingerprint; // = "B62451661D74C6A46533A748EE436D44";
-  static const uint8_t binary_fingerprint[16]; // = {0xB6,0x24,0x51,0x66,0x1D,0x74,0xC6,0xA4,0x65,0x33,0xA7,0x48,0xEE,0x43,0x6D,0x44};
+  static const char* ascii_fingerprint; // = "1C897B74029D7B8562961FC4E1C828E3";
+  static const uint8_t binary_fingerprint[16]; // = {0x1C,0x89,0x7B,0x74,0x02,0x9D,0x7B,0x85,0x62,0x96,0x1F,0xC4,0xE1,0xC8,0x28,0xE3};
 
   Notebook() : guid(""), name(""), updateSequenceNum(0), defaultNotebook(0), serviceCreated(0), serviceUpdated(0), published(0), stack("") {
   }

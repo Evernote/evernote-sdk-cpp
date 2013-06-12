@@ -86,8 +86,8 @@ typedef struct _SyncChunk__isset {
 class SyncChunk {
  public:
 
-  static const char* ascii_fingerprint; // = "F3ACA431C6359CF91468373FE27A299F";
-  static const uint8_t binary_fingerprint[16]; // = {0xF3,0xAC,0xA4,0x31,0xC6,0x35,0x9C,0xF9,0x14,0x68,0x37,0x3F,0xE2,0x7A,0x29,0x9F};
+  static const char* ascii_fingerprint; // = "E54B7D76D1F538784AA75357CB8A1AD4";
+  static const uint8_t binary_fingerprint[16]; // = {0xE5,0x4B,0x7D,0x76,0xD1,0xF5,0x38,0x78,0x4A,0xA7,0x53,0x57,0xCB,0x8A,0x1A,0xD4};
 
   SyncChunk() : currentTime(0), chunkHighUSN(0), updateCount(0) {
   }
@@ -380,8 +380,8 @@ typedef struct _NoteList__isset {
 class NoteList {
  public:
 
-  static const char* ascii_fingerprint; // = "247438EE9CE5000387EA7622BA67FF05";
-  static const uint8_t binary_fingerprint[16]; // = {0x24,0x74,0x38,0xEE,0x9C,0xE5,0x00,0x03,0x87,0xEA,0x76,0x22,0xBA,0x67,0xFF,0x05};
+  static const char* ascii_fingerprint; // = "E0C7ABF656FCFFAB11668ADB39047D9B";
+  static const uint8_t binary_fingerprint[16]; // = {0xE0,0xC7,0xAB,0xF6,0x56,0xFC,0xFF,0xAB,0x11,0x66,0x8A,0xDB,0x39,0x04,0x7D,0x9B};
 
   NoteList() : startIndex(0), totalNotes(0), updateCount(0) {
   }
@@ -448,8 +448,8 @@ typedef struct _NoteMetadata__isset {
 class NoteMetadata {
  public:
 
-  static const char* ascii_fingerprint; // = "1578F0E944B8153601B3E0E2A8789A90";
-  static const uint8_t binary_fingerprint[16]; // = {0x15,0x78,0xF0,0xE9,0x44,0xB8,0x15,0x36,0x01,0xB3,0xE0,0xE2,0xA8,0x78,0x9A,0x90};
+  static const char* ascii_fingerprint; // = "2F280A04E4BFDA1C51231C465C49126D";
+  static const uint8_t binary_fingerprint[16]; // = {0x2F,0x28,0x0A,0x04,0xE4,0xBF,0xDA,0x1C,0x51,0x23,0x1C,0x46,0x5C,0x49,0x12,0x6D};
 
   NoteMetadata() : guid(""), title(""), contentLength(0), created(0), updated(0), deleted(0), updateSequenceNum(0), notebookGuid(""), largestResourceMime(""), largestResourceSize(0) {
   }
@@ -542,8 +542,8 @@ typedef struct _NotesMetadataList__isset {
 class NotesMetadataList {
  public:
 
-  static const char* ascii_fingerprint; // = "7D013882B10E35EFC3DF012E73D7F97A";
-  static const uint8_t binary_fingerprint[16]; // = {0x7D,0x01,0x38,0x82,0xB1,0x0E,0x35,0xEF,0xC3,0xDF,0x01,0x2E,0x73,0xD7,0xF9,0x7A};
+  static const char* ascii_fingerprint; // = "6D6571833726D08358868A3067A3239C";
+  static const uint8_t binary_fingerprint[16]; // = {0x6D,0x65,0x71,0x83,0x37,0x26,0xD0,0x83,0x58,0x86,0x8A,0x30,0x67,0xA3,0x23,0x9C};
 
   NotesMetadataList() : startIndex(0), totalNotes(0), updateCount(0) {
   }
@@ -755,8 +755,8 @@ typedef struct _NoteEmailParameters__isset {
 class NoteEmailParameters {
  public:
 
-  static const char* ascii_fingerprint; // = "843CBB049F3F618BEC63835DE8BEB534";
-  static const uint8_t binary_fingerprint[16]; // = {0x84,0x3C,0xBB,0x04,0x9F,0x3F,0x61,0x8B,0xEC,0x63,0x83,0x5D,0xE8,0xBE,0xB5,0x34};
+  static const char* ascii_fingerprint; // = "05BC1733677D309B49001D12956AE730";
+  static const uint8_t binary_fingerprint[16]; // = {0x05,0xBC,0x17,0x33,0x67,0x7D,0x30,0x9B,0x49,0x00,0x1D,0x12,0x95,0x6A,0xE7,0x30};
 
   NoteEmailParameters() : guid(""), subject(""), message("") {
   }
@@ -891,19 +891,20 @@ class ClientUsageMetrics {
 };
 
 typedef struct _RelatedQuery__isset {
-  _RelatedQuery__isset() : noteGuid(false), plainText(false), filter(false) {}
+  _RelatedQuery__isset() : noteGuid(false), plainText(false), filter(false), referenceUri(false) {}
   bool noteGuid;
   bool plainText;
   bool filter;
+  bool referenceUri;
 } _RelatedQuery__isset;
 
 class RelatedQuery {
  public:
 
-  static const char* ascii_fingerprint; // = "98542AA5E3BA0C4C5CB7DE85C90729CF";
-  static const uint8_t binary_fingerprint[16]; // = {0x98,0x54,0x2A,0xA5,0xE3,0xBA,0x0C,0x4C,0x5C,0xB7,0xDE,0x85,0xC9,0x07,0x29,0xCF};
+  static const char* ascii_fingerprint; // = "14EEB780F63E8608C64946DF68EF0269";
+  static const uint8_t binary_fingerprint[16]; // = {0x14,0xEE,0xB7,0x80,0xF6,0x3E,0x86,0x08,0xC6,0x49,0x46,0xDF,0x68,0xEF,0x02,0x69};
 
-  RelatedQuery() : noteGuid(""), plainText("") {
+  RelatedQuery() : noteGuid(""), plainText(""), referenceUri("") {
   }
 
   virtual ~RelatedQuery() throw() {}
@@ -911,6 +912,7 @@ class RelatedQuery {
   std::string noteGuid;
   std::string plainText;
   NoteFilter filter;
+  std::string referenceUri;
 
   _RelatedQuery__isset __isset;
 
@@ -927,6 +929,10 @@ class RelatedQuery {
     if (__isset.filter != rhs.__isset.filter)
       return false;
     else if (__isset.filter && !(filter == rhs.filter))
+      return false;
+    if (__isset.referenceUri != rhs.__isset.referenceUri)
+      return false;
+    else if (__isset.referenceUri && !(referenceUri == rhs.referenceUri))
       return false;
     return true;
   }
@@ -952,8 +958,8 @@ typedef struct _RelatedResult__isset {
 class RelatedResult {
  public:
 
-  static const char* ascii_fingerprint; // = "01A1A2D435221A0960C9ADC5FD0A2069";
-  static const uint8_t binary_fingerprint[16]; // = {0x01,0xA1,0xA2,0xD4,0x35,0x22,0x1A,0x09,0x60,0xC9,0xAD,0xC5,0xFD,0x0A,0x20,0x69};
+  static const char* ascii_fingerprint; // = "EDEA62B7FAD55C6BFC17896D50B64AAD";
+  static const uint8_t binary_fingerprint[16]; // = {0xED,0xEA,0x62,0xB7,0xFA,0xD5,0x5C,0x6B,0xFC,0x17,0x89,0x6D,0x50,0xB6,0x4A,0xAD};
 
   RelatedResult() {
   }

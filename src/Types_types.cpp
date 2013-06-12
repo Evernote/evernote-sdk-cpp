@@ -2062,8 +2062,8 @@ uint32_t Resource::write(::apache::thrift::protocol::TProtocol* oprot) const {
   return xfer;
 }
 
-const char* NoteAttributes::ascii_fingerprint = "51C96AF5DF1D5C48941C715E12C922CD";
-const uint8_t NoteAttributes::binary_fingerprint[16] = {0x51,0xC9,0x6A,0xF5,0xDF,0x1D,0x5C,0x48,0x94,0x1C,0x71,0x5E,0x12,0xC9,0x22,0xCD};
+const char* NoteAttributes::ascii_fingerprint = "05191C2C3618087A364FEEB9B4854C4C";
+const uint8_t NoteAttributes::binary_fingerprint[16] = {0x05,0x19,0x1C,0x2C,0x36,0x18,0x08,0x7A,0x36,0x4F,0xEE,0xB9,0xB4,0x85,0x4C,0x4C};
 
 uint32_t NoteAttributes::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -2236,6 +2236,22 @@ uint32_t NoteAttributes::read(::apache::thrift::protocol::TProtocol* iprot) {
           xfer += iprot->skip(ftype);
         }
         break;
+      case 27:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->creatorId);
+          this->__isset.creatorId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 28:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->lastEditorId);
+          this->__isset.lastEditorId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -2345,13 +2361,23 @@ uint32_t NoteAttributes::write(::apache::thrift::protocol::TProtocol* oprot) con
     }
     xfer += oprot->writeFieldEnd();
   }
+  if (this->__isset.creatorId) {
+    xfer += oprot->writeFieldBegin("creatorId", ::apache::thrift::protocol::T_I32, 27);
+    xfer += oprot->writeI32(this->creatorId);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.lastEditorId) {
+    xfer += oprot->writeFieldBegin("lastEditorId", ::apache::thrift::protocol::T_I32, 28);
+    xfer += oprot->writeI32(this->lastEditorId);
+    xfer += oprot->writeFieldEnd();
+  }
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
 }
 
-const char* Note::ascii_fingerprint = "561F08A2064D56C048636905F44C0329";
-const uint8_t Note::binary_fingerprint[16] = {0x56,0x1F,0x08,0xA2,0x06,0x4D,0x56,0xC0,0x48,0x63,0x69,0x05,0xF4,0x4C,0x03,0x29};
+const char* Note::ascii_fingerprint = "7353B8F6A0836D0275C7D15623BC4B42";
+const uint8_t Note::binary_fingerprint[16] = {0x73,0x53,0xB8,0xF6,0xA0,0x83,0x6D,0x02,0x75,0xC7,0xD1,0x56,0x23,0xBC,0x4B,0x42};
 
 uint32_t Note::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -3034,8 +3060,77 @@ uint32_t SavedSearch::write(::apache::thrift::protocol::TProtocol* oprot) const 
   return xfer;
 }
 
-const char* SharedNotebook::ascii_fingerprint = "76B3B96355CD4C54BDB337E59754EACE";
-const uint8_t SharedNotebook::binary_fingerprint[16] = {0x76,0xB3,0xB9,0x63,0x55,0xCD,0x4C,0x54,0xBD,0xB3,0x37,0xE5,0x97,0x54,0xEA,0xCE};
+const char* SharedNotebookRecipientSettings::ascii_fingerprint = "1959DF646639D95C0F1375CF60F71F5B";
+const uint8_t SharedNotebookRecipientSettings::binary_fingerprint[16] = {0x19,0x59,0xDF,0x64,0x66,0x39,0xD9,0x5C,0x0F,0x13,0x75,0xCF,0x60,0xF7,0x1F,0x5B};
+
+uint32_t SharedNotebookRecipientSettings::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->reminderNotifyEmail);
+          this->__isset.reminderNotifyEmail = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->reminderNotifyInApp);
+          this->__isset.reminderNotifyInApp = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t SharedNotebookRecipientSettings::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("SharedNotebookRecipientSettings");
+  if (this->__isset.reminderNotifyEmail) {
+    xfer += oprot->writeFieldBegin("reminderNotifyEmail", ::apache::thrift::protocol::T_BOOL, 1);
+    xfer += oprot->writeBool(this->reminderNotifyEmail);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.reminderNotifyInApp) {
+    xfer += oprot->writeFieldBegin("reminderNotifyInApp", ::apache::thrift::protocol::T_BOOL, 2);
+    xfer += oprot->writeBool(this->reminderNotifyInApp);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+const char* SharedNotebook::ascii_fingerprint = "ADE8562808728688B25423E5F39AA8F5";
+const uint8_t SharedNotebook::binary_fingerprint[16] = {0xAD,0xE8,0x56,0x28,0x08,0x72,0x86,0x88,0xB2,0x54,0x23,0xE5,0xF3,0x9A,0xA8,0xF5};
 
 uint32_t SharedNotebook::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -3155,6 +3250,14 @@ uint32_t SharedNotebook::read(::apache::thrift::protocol::TProtocol* iprot) {
           xfer += iprot->skip(ftype);
         }
         break;
+      case 13:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->recipientSettings.read(iprot);
+          this->__isset.recipientSettings = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -3228,6 +3331,11 @@ uint32_t SharedNotebook::write(::apache::thrift::protocol::TProtocol* oprot) con
   if (this->__isset.allowPreview) {
     xfer += oprot->writeFieldBegin("allowPreview", ::apache::thrift::protocol::T_BOOL, 12);
     xfer += oprot->writeBool(this->allowPreview);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.recipientSettings) {
+    xfer += oprot->writeFieldBegin("recipientSettings", ::apache::thrift::protocol::T_STRUCT, 13);
+    xfer += this->recipientSettings.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -3542,8 +3650,8 @@ uint32_t NotebookRestrictions::write(::apache::thrift::protocol::TProtocol* opro
   return xfer;
 }
 
-const char* Notebook::ascii_fingerprint = "B62451661D74C6A46533A748EE436D44";
-const uint8_t Notebook::binary_fingerprint[16] = {0xB6,0x24,0x51,0x66,0x1D,0x74,0xC6,0xA4,0x65,0x33,0xA7,0x48,0xEE,0x43,0x6D,0x44};
+const char* Notebook::ascii_fingerprint = "1C897B74029D7B8562961FC4E1C828E3";
+const uint8_t Notebook::binary_fingerprint[16] = {0x1C,0x89,0x7B,0x74,0x02,0x9D,0x7B,0x85,0x62,0x96,0x1F,0xC4,0xE1,0xC8,0x28,0xE3};
 
 uint32_t Notebook::read(::apache::thrift::protocol::TProtocol* iprot) {
 

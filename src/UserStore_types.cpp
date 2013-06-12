@@ -132,8 +132,8 @@ uint32_t PublicUserInfo::write(::apache::thrift::protocol::TProtocol* oprot) con
   return xfer;
 }
 
-const char* AuthenticationResult::ascii_fingerprint = "CCC8B1354EE85C9E054690C28F5FDE50";
-const uint8_t AuthenticationResult::binary_fingerprint[16] = {0xCC,0xC8,0xB1,0x35,0x4E,0xE8,0x5C,0x9E,0x05,0x46,0x90,0xC2,0x8F,0x5F,0xDE,0x50};
+const char* AuthenticationResult::ascii_fingerprint = "AC3ACA1F66892F38A3B6A141A932B007";
+const uint8_t AuthenticationResult::binary_fingerprint[16] = {0xAC,0x3A,0xCA,0x1F,0x66,0x89,0x2F,0x38,0xA3,0xB6,0xA1,0x41,0xA9,0x32,0xB0,0x07};
 
 uint32_t AuthenticationResult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -214,6 +214,22 @@ uint32_t AuthenticationResult::read(::apache::thrift::protocol::TProtocol* iprot
           xfer += iprot->skip(ftype);
         }
         break;
+      case 8:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->secondFactorRequired);
+          this->__isset.secondFactorRequired = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 9:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->secondFactorDeliveryHint);
+          this->__isset.secondFactorDeliveryHint = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -262,6 +278,16 @@ uint32_t AuthenticationResult::write(::apache::thrift::protocol::TProtocol* opro
   if (this->__isset.webApiUrlPrefix) {
     xfer += oprot->writeFieldBegin("webApiUrlPrefix", ::apache::thrift::protocol::T_STRING, 7);
     xfer += oprot->writeString(this->webApiUrlPrefix);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.secondFactorRequired) {
+    xfer += oprot->writeFieldBegin("secondFactorRequired", ::apache::thrift::protocol::T_BOOL, 8);
+    xfer += oprot->writeBool(this->secondFactorRequired);
+    xfer += oprot->writeFieldEnd();
+  }
+  if (this->__isset.secondFactorDeliveryHint) {
+    xfer += oprot->writeFieldBegin("secondFactorDeliveryHint", ::apache::thrift::protocol::T_STRING, 9);
+    xfer += oprot->writeString(this->secondFactorDeliveryHint);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
